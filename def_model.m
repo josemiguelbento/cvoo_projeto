@@ -27,7 +27,7 @@ function [cond_ini, max_deflec, inert, wing, deriv] = def_model()
     inert.Ix =10990; %kg .m ^2
     inert.Iy =15395; %kg .m ^2
     inert.Iz =20571; %kg .m ^2
-    inert.Ixz =149; %kg .m ^2
+    inert.Ixz =149; %kg .m ^1
     
     %wing data
     wing.S =87.51; %m ^2
