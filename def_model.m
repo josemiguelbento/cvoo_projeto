@@ -1,7 +1,7 @@
 function [cond_ini, max_deflec, inert, wing, deriv] = def_model()
     
     deg = pi/180;
-    kn = 0.514444444; %1 kn = 0.514444444 m
+    kn = 0.514444444; %1 kn = 0.514444444 m/s
     
     %Initial flight condition
     cond_ini.h =50;
@@ -40,10 +40,8 @@ function [cond_ini, max_deflec, inert, wing, deriv] = def_model()
     deriv.xw = 0.0058;
     deriv.zu = -0.5737;
     deriv.zw = -3.2532;
-    %deriv.zwp = -0.0399; %falta
-    %deriv.zq = -3.1076; %falta
-    deriv.zwp = 0; %falta
-    deriv.zq = 0; %falta
+    deriv.zwp = -0.0399; %falta
+    deriv.zq = -3.1076; %falta
     deriv.mu = 0.0000;
     deriv.mw = -0.0576;
     deriv.mq = -0.0555;
