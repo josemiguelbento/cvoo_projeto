@@ -80,9 +80,12 @@ end
 % deriv.xu -g*cond_ini.tt0;
 % -deriv.zu/cond_ini.u0 0];
 
-a_fug=[
-deriv.xu -g*cos(cond_ini.tt0);
--deriv.zu/(deriv.zq+cond_ini.u0) g*sin(cond_ini.tt0)/(deriv.zq+cond_ini.u0)];
+a=[
+deriv.xu deriv.xw -w0 -g*cos(cond_ini.tt0) 0;
+deriv.zu/(1-deriv.zwp) deriv.zw/(1-deriv.zwp) (cond_ini.u0+deriv.zq)/(1-deriv.zwp) -g*sin(cond_ini.tt0)/(1-deriv.zwp) 0;
+(deriv.mu+deriv.mwp*deriv.zu/(1-deriv.zwp)) (deriv.mw+deriv.mwp*deriv.zw/(1-deriv.zwp)) (deriv.mq+deriv.mwp*(cond_ini.u0+deriv.zq)/(1-deriv.zwp)) -deriv.mwp*g*sin(cond_ini.tt0)/(1-deriv.zwp) 0;
+0 0 1 0 0;
+0 -1 0 cond_ini.u0 0];
 
 %b=[deriv.xde deriv.xdt;deriv.zde 0;deriv.mde+deriv.mwp*deriv.zde deriv.mdt;0 0];
 %b_fug=[deriv.xde deriv.xdsp;-deriv.zde/cond_ini.u0 -deriv.zdsp/cond_ini.u0];
