@@ -114,19 +114,19 @@ t_pc = log(2)/M_pc;
 
 fprintf('\n\nFugóide:')
 if(p_re(I_fug)>0)
-    str = ['\n\tT_2 =' ' ' num2str(t_fug)];
+    str = ['\n\tT_2 =' ' ' num2str(t_fug) 's'];
     fprintf(str)
 elseif(p_re(I_fug)<0)
-    str = ['\n\tT_{1/2} =' ' ' num2str(t_fug)];
+    str = ['\n\tT_{1/2} =' ' ' num2str(t_fug) 's'];
     fprintf(str)
 end
 
 fprintf('\n\nPeríodo Curto:')
 if(p_re(I_pc)>0)
-    str = ['\n\tT_2 = ' num2str(t_pc),'\n'];
+    str = ['\n\tT_2 = ' num2str(t_pc) 's' '\n'];
     fprintf(str)
 elseif(p_re(I_pc)<0)
-    str = ['\n\tT_{1/2} = ',num2str(t_pc),'\n'];
+    str = ['\n\tT_{1/2} = ' num2str(t_pc) 's' '\n'];
     fprintf(str)
 end
 
