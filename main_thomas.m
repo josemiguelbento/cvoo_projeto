@@ -30,7 +30,7 @@ Mdsp_til = deriv.mdsp+deriv.mwp*deriv.zdsp/(1-deriv.zwp);
 
 
 % %vamos definir a matriz da dinâmica tradicional, a, com entradas:
-% %   x_h = [u; w; q; tt; h]
+% %   x = [u; w; q; tt]
 % a = [
 %     deriv.xu deriv.xw -w0 -g*cos(cond_ini.tt0);
 %     Zu_til  Zw_til Zq_til Ztt_til;
@@ -94,11 +94,6 @@ damp(a_h)
 sys = ss(a_h,b_h,c_h,d_h);
 pzmap(sys)
 
-%vamos obter as funções de transferência para cada um dos atuadores
-[num_de,den_de]=ss2tf(a_h,b_h,c_h,d_h,1); %de (elevador)
-[num_df,den_df]=ss2tf(a_h,b_h,c_h,d_h,2); %df (flaps)
-[num_dsp,den_dsp]=ss2tf(a_h,b_h,c_h,d_h,3); %df (spoiler)
-
 %agora vamos estudar o comportamento dos modos longitudinais
 [wn,zeta,p]=damp(a_h);
 p_re = nonzeros(real(p)); %vetor dos polos com parte real não nula
@@ -130,4 +125,7 @@ elseif(p_re(I_pc)<0)
     fprintf(str)
 end
 
-
+% %vamos obter as funções de transferência para cada um dos atuadores
+% [num_de,den_de]=ss2tf(a_h,b_h,c_h,d_h,1); %de (elevador)
+% [num_df,den_df]=ss2tf(a_h,b_h,c_h,d_h,2); %df (flaps)
+% [num_dsp,den_dsp]=ss2tf(a_h,b_h,c_h,d_h,3); %df (spoiler)
