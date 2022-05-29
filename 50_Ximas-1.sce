@@ -90,7 +90,7 @@ Ldr = 0.000
 Ndr = -2.611
 
 // Definicao das Entradas Auxiliares para a Matriz da Dinâmica
-Mu_til = mwp*zu/(1-zwp)
+Mu_til = mu + mwp*zu/(1-zwp)
 Mw_til = mw + mwp*zw/(1-zwp)
 Mq_til = mq + mwp/(1-zwp)*(u0+zq)
 Mtt_til = -mwp*g*sin(tt0)/(1-zwp)
