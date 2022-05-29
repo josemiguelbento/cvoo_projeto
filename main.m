@@ -20,13 +20,13 @@ w0 = cond_ini.aa0*cond_ini.u0;
 %considerando todos os coeficientes
 %x=[u;w;q;tt;h]
 
-% %esta matriz é a que estava antes
-% a=[
-% deriv.xu deriv.xw -w0 -g*cos(cond_ini.tt0) 0;
-% deriv.zu/(1-deriv.zwp) deriv.zw/(1-deriv.zwp) (cond_ini.u0+deriv.zq)/(1-deriv.zwp) -g*sin(cond_ini.tt0)/(1-deriv.zwp) 0;
-% (deriv.mu+deriv.mwp*deriv.zu/(1-deriv.zwp)) (deriv.mw+deriv.mwp*deriv.zw/(1-deriv.zwp)) (deriv.mq+deriv.mwp*(cond_ini.u0+deriv.zq)/(1-deriv.zwp)) -deriv.mwp*g*sin(cond_ini.tt0)/(1-deriv.zwp) 0;
-% 0 0 1 0 0;
-% 0 -1 0 cond_ini.u0 0];
+%esta matriz é a que estava antes
+a=[
+deriv.xu deriv.xw -w0 -g*cos(cond_ini.tt0) 0;
+deriv.zu/(1-deriv.zwp) deriv.zw/(1-deriv.zwp) (cond_ini.u0+deriv.zq)/(1-deriv.zwp) -g*sin(cond_ini.tt0)/(1-deriv.zwp) 0;
+(deriv.mu+deriv.mwp*deriv.zu/(1-deriv.zwp)) (deriv.mw+deriv.mwp*deriv.zw/(1-deriv.zwp)) (deriv.mq+deriv.mwp*(cond_ini.u0+deriv.zq)/(1-deriv.zwp)) -deriv.mwp*g*sin(cond_ini.tt0)/(1-deriv.zwp) 0;
+0 0 1 0 0;
+0 -1 0 cond_ini.u0 0];
 
 % %Thomas a avacalhar só, basicamente apaguei o Mu
 % a=[
@@ -37,11 +37,11 @@ w0 = cond_ini.aa0*cond_ini.u0;
 % 0 -1 0 cond_ini.u0 0];
 
 % %Thomas a avacalhar só, agora tirei a altitude
-a=[
-deriv.xu deriv.xw -w0 -g*cos(cond_ini.tt0);
-deriv.zu/(1-deriv.zwp) deriv.zw/(1-deriv.zwp) (cond_ini.u0+deriv.zq)/(1-deriv.zwp) -g*sin(cond_ini.tt0)/(1-deriv.zwp);
-(deriv.mwp*deriv.zu/(1-deriv.zwp)) (deriv.mw+deriv.mwp*deriv.zw/(1-deriv.zwp)) (deriv.mq+deriv.mwp*(cond_ini.u0+deriv.zq)/(1-deriv.zwp)) -deriv.mwp*g*sin(cond_ini.tt0)/(1-deriv.zwp);
-0 0 1 0];
+% a=[
+% deriv.xu deriv.xw -w0 -g*cos(cond_ini.tt0);
+% deriv.zu/(1-deriv.zwp) deriv.zw/(1-deriv.zwp) (cond_ini.u0+deriv.zq)/(1-deriv.zwp) -g*sin(cond_ini.tt0)/(1-deriv.zwp);
+% (deriv.mwp*deriv.zu/(1-deriv.zwp)) (deriv.mw+deriv.mwp*deriv.zw/(1-deriv.zwp)) (deriv.mq+deriv.mwp*(cond_ini.u0+deriv.zq)/(1-deriv.zwp)) -deriv.mwp*g*sin(cond_ini.tt0)/(1-deriv.zwp);
+% 0 0 1 0];
 
 %u=[de;df;dsp]
 b=[deriv.xde deriv.xdf deriv.xdsp;deriv.zde/(1-deriv.zwp) deriv.zdf/(1-deriv.zwp) deriv.zdsp/(1-deriv.zwp);deriv.mde+deriv.mwp*deriv.zde/(1-deriv.zwp) deriv.mdf+deriv.mwp*deriv.zdf/(1-deriv.zwp) deriv.mdsp+deriv.mwp*deriv.zdsp/(1-deriv.zwp);0 0 0;0 0 0];
