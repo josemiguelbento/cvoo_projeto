@@ -1,41 +1,45 @@
+//Tema 50 - Ximas-1
+// Seguimento de Solo - velocidades ar e subida
+
 clear all
 clc
 
+// Definicao da Aceleracao Gravitica
 g = 9.81 // m.s^-2
 
+// Definicao dos Fatores de Conversao
 deg = %pi/180
 kt = 0.514444444 // 1kt = 0.514444444 m/s
 
 
-// Flight Condition
-
-h = 50 // m
-aa0 = 3.84*deg // deg
-gg0 = 0*deg // deg
-u0 = 66.1*kt //kt
-flaps = 5*deg // deg
-de0 = -7.44*deg // deg
-da0 = 0.58*deg // deg
-dr0 = -0.01*deg // deg
+// Initial Flight Conditions
+h0 = 50 // m
+aa0 = 3.84*deg // rad
+gg0 = 0*deg // rad
+u0 = 66.1*kt // m/s
+flaps0 = 5*deg // rad
+de0 = -7.44*deg // rad
+da0 = 0.58*deg // rad
+dr0 = -0.01*deg // rad
 q0 = 0 // rad/s
 
-w0 = u0*aa0
-tt0 = aa0+gg0
+w0 = u0*aa0 // m/s
+tt0 = aa0+gg0 // rad
 
-X0 = [u0;w0;q0;tt0]
+
+// Definicao do estado inicial
+X0 = [u0;w0;q0;tt0;h0]
 
 
 // Maximum Deflections
-
-delim = [28*deg 21*deg] // deg
-damax = 17*deg // deg
-drmax = 23*deg // deg
-flapmax = 40*deg // deg
-spmax = 60*deg // deg
+delim = [28*deg 21*deg] // rad
+damax = 17*deg // rad
+drmax = 23*deg // rad
+flapmax = 40*deg // rad
+spmax = 60*deg // rad
 
 
 // Inertial Data
-
 m = 3236 // kg
 Ix = 10990 //kg.m^2
 Iy = 15395 //kg.m^2
@@ -44,7 +48,6 @@ Ixz = 149 //kg.m^2
 
 
 // Wing Data
-
 S = 87.51 // m^2
 b = 12.497 // m
 c = 1.592 // m
@@ -52,7 +55,6 @@ aamax = 14.99*deg // deg
 
 
 // Stability Derivatives (no units / SI units)
-
 xu = -0.0822
 xw = 0.0058
 zu = -0.5737
@@ -87,24 +89,91 @@ Ydr = -0.026
 Ldr = 0.000
 Ndr = -2.611
 
+// Definicao das Entradas Auxiliares para a Matriz da Dinâmica
+Mu_til = mwp*zu/(1-zwp)
+Mw_til = mw + mwp*zw/(1-zwp)
+Mq_til = mq + mwp/(1-zwp)*(u0+zq)
+Mtt_til = -mwp*g*sin(tt0)/(1-zwp)
+Zu_til = zu/(1-zwp)
+Zw_til = zw/(1-zwp)
+Zq_til = (zq + u0)/(1-zwp)
+Ztt_til = -g*sin(tt0)/(1-zwp)
+Zde_til = zde/(1-zwp)
+Zdf_til = zdf/(1-zwp)
+Z_dsp_til = zdsp/(1-zwp)
+Mde_til = mde+mwp*zde/(1-zwp)
+Mdf_til = mdf+mwp*zdf/(1-zwp)
+Mdsp_til = mdsp+mwp*zdsp/(1-zwp)
 
 
-// Model Definition
+// Definicao da matriz da dinâmica, A, com entradas (incluindo h):
+//  x = [u; w; q; tt; h]
+A = [
+    xu xw -w0 -g*cos(tt0) 0;
+    Zu_til  Zw_til Zq_til Ztt_til 0;
+    Mu_til Mw_til Mq_til Mtt_til 0;
+    0 0 1 0 0;
+    0 -1 0 u0 0;
+    ];
 
-A = [xu xw -w0 -g*cos(tt0);zu/(1-zwp) zw/(1-zwp) (zq+u0)/(1-zwp) -g*sin(tt0)/(1-zwp); mwp*zu/(1-zwp) mw+mwp*zw/(1-zwp) mq+mwp*(zq+u0)/(1-zwp) -mwp*g*sin(tt0)/(1-zwp);0 0 1 0]
+// Definicao da matriz do controlo B, com entradas de controlo:
+//  u = [de; df; dsp]
+B = [
+    xde xdf xdsp;
+    Zde_til Zdf_til Z_dsp_til;
+    Mde_til Mdf_til Mdsp_til;
+    0 0 0;
+    0 0 0;
+    ];
 
-B = [xde xdf xdsp; zde 0 0; mde+mwp*zde/(1-zwp) 0 0;0 0 0]
-
+// Definicao das matrizes C e D, assumindo y = x (a saída  
+// é o próprio estado)
 C = eye(A)
-
 D = zeros(B)
 
-sys = syslin([],A,B,C,D,X0)
 
+// Criacao de sistema dinamico linear do tipo xp=Ax+Bu, com saida yp=Cx+Du
+sys = syslin('c',A,B,C,D,X0)
+
+// Calculo dos valores proprios da matriz da dinamica, A
+p = spec(A)
+// Calculo das frequencias naturais e dos fatores de amortecimento de cada polo
 [wn zz] = damp(sys)
 
-disp(spec(A))
+printf(' Pólos:')
+disp(p)
+printf('\n Frequências Naturais:')
 disp(wn)
+printf('\n Fatores de Amortecimento:')
 disp(zz)
 
+
+// Representacao Grafica dos polos do sistema
 plzr(sys)
+
+
+// Calculo dos tempos de atenuacao ou amplificacao dos modos longitudinais
+p_re = real(p((real(p))~=0)); // vetor dos polos com parte real não nula
+
+// Primeiro passo é separar os pólos do Período Curto dos pólos do Fugóide
+//    Fugóide (pólos com menor parte real, em valor absoluto):
+[M_fug,I_fug] = min(abs(p_re))
+t_fug = log(2)/M_fug
+
+//    Período Curto (pólos com maior parte real, em valor absoluto):
+[M_pc,I_pc]=max(abs(p_re));
+t_pc = log(2)/M_pc;
+
+printf('\n\nModo Fugóide:')
+if(real(p_re(I_fug))>0)
+    printf('\n\tT_2 = %f', t_fug)
+elseif(real(p_re(I_fug))<0)
+    printf('\n\tT_{1/2} = %f', t_fug)
+end
+
+printf('\n\nModo Período Curto:')
+if(real(p_re(I_pc))>0)
+    printf('\n\tT_2 = %f', t_pc)
+elseif(real(p_re(I_pc))<0)
+    printf('\n\tT_{1/2} = %f', t_pc)
+end
