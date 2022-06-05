@@ -131,6 +131,17 @@ end
 [num_dsp,den_dsp]=ss2tf(a_h,b_h,c_h,d_h,3); %dsp (spoiler)
 
 %% RP2--------------------------------------------------------------------
+%avaliar controlabilidade e observabilidade
+Co = ctrb(a_h,b_h);
+k_co = rank(Co);
+% como a característica da matriz controlabilidade é igual ao número de
+% estados, o sistema é controlável
+
+Ob = obsv(a_h,c_h);
+k_ob = rank(Ob);
+% como a característica da matriz observabilidade é igual ao número de
+% estados, o sistema é observável
+
 %definição das condicoes iniciais para o simulink
 x0 = [cond_ini.u0 cond_ini.aa0*cond_ini.u0 0 cond_ini.tt0 cond_ini.h];
 %T=20; % tempo de duração da simulação
