@@ -126,23 +126,12 @@ elseif(p_re(I_pc)<0)
 end
 
 % %vamos obter as funções de transferência para cada um dos atuadores
-[num_de,den_de]=ss2tf(a_h,b_h,c_h,d_h,1); %de (elevador)
-[num_df,den_df]=ss2tf(a_h,b_h,c_h,d_h,2); %df (flaps)
-[num_dsp,den_dsp]=ss2tf(a_h,b_h,c_h,d_h,3); %dsp (spoiler)
+% [num_de,den_de]=ss2tf(a_h,b_h,c_h,d_h,1); %de (elevador)
+% [num_df,den_df]=ss2tf(a_h,b_h,c_h,d_h,2); %df (flaps)
+% [num_dsp,den_dsp]=ss2tf(a_h,b_h,c_h,d_h,3); %df (spoiler)
 
 %% RP2--------------------------------------------------------------------
 %definição das condicoes iniciais para o simulink
 x0 = [cond_ini.u0 cond_ini.aa0*cond_ini.u0 0 cond_ini.tt0 cond_ini.h];
-%T=20; % tempo de duração da simulação
-%res=sim('cvoo_g19',T);
-
-%como o problema é o fugoide vamos realimentar a velocidade (o estado que
-%melhor traduz este modo) para a entrada do spoiler.
-num_dsp_u = num_dsp(1,:); %1- estamos a avaliar a estabilização do estado velocidade com spoiler
-sys_sp = tf(num_dsp_u,den_dsp);
-rlocus(sys_sp)
-
-% figure()
-% num_de_u = num_de(1,:); %1- estamos a avaliar a estabilização do estado velocidade com elevator
-% sys_e = tf(num_de_u,den_de);
-% rlocus(sys_e)
+T=20; % tempo de duração da simulação
+res=sim('cvoo_g19',T);
