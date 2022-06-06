@@ -1,5 +1,5 @@
-%tema 50 - Ximas-1 - velocidades ar e subida - seguimento de solo
-
+%% tema 50 - Ximas-1 - velocidades ar e subida - seguimento de solo
+%% RP1
 clear
 close all
 clc
@@ -151,8 +151,9 @@ x0 = [cond_ini.u0 cond_ini.aa0*cond_ini.u0 0 cond_ini.tt0 cond_ini.h];
 %melhor traduz este modo) para a entrada do spoiler.
 num_dsp_u = num_dsp(1,:); %1- estamos a avaliar a estabilização do estado velocidade com spoiler
 sys_sp = tf(num_dsp_u,den_dsp);
-rlocus(sys_sp)
-
+rlocus(sys_sp) %realimentação positiva 
+figure()
+rlocus(-sys_sp)
 % figure()
 % num_de_u = num_de(1,:); %1- estamos a avaliar a estabilização do estado velocidade com elevator
 % sys_e = tf(num_de_u,den_de);

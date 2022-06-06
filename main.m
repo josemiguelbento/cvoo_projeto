@@ -1,5 +1,5 @@
-%tema 50 - Ximas-1 - velocidades ar e subida - seguimento de solo
-
+%% tema 50 - Ximas-1 - velocidades ar e subida - seguimento de solo
+%% RP1
 clear
 close all
 clc
@@ -142,18 +142,42 @@ k_ob = rank(Ob);
 % como a característica da matriz observabilidade é igual ao número de
 % estados, o sistema é observável
 
-%definição das condicoes iniciais para o simulink
-x0 = [cond_ini.u0 cond_ini.aa0*cond_ini.u0 0 cond_ini.tt0 cond_ini.h];
-%T=20; % tempo de duração da simulação
-%res=sim('cvoo_g19',T);
-
 %como o problema é o fugoide vamos realimentar a velocidade (o estado que
 %melhor traduz este modo) para a entrada do spoiler.
 num_dsp_u = num_dsp(1,:); %1- estamos a avaliar a estabilização do estado velocidade com spoiler
 sys_sp = tf(num_dsp_u,den_dsp);
-rlocus(sys_sp)
+rlocus(sys_sp) %realimentação negativa - fica instável
+figure()
+rlocus(-sys_sp) %realimentação positiva - já fica estável
 
-% figure()
-% num_de_u = num_de(1,:); %1- estamos a avaliar a estabilização do estado velocidade com elevator
-% sys_e = tf(num_de_u,den_de);
-% rlocus(sys_e)
+%% LQR
+% Tirando flaps como superficie de controlo
+b_h_sf = b_h(:,[1,3]);
+d_h_sf = d_h(:,[1,3]);
+
+Q = diag([1 1 1 1 1]);
+R = 1;
+
+K_lqr = lqr(a_h, b_h_sf, Q, R);
+
+damp(a_h-b_h_sf*K_lqr)
+
+sys_lqr = ss(a_h-b_h_sf*K_lqr, b_h_sf, c_h, d_h_sf);
+figure()
+step(sys_lqr)
+
+%definição das condicoes iniciais para o simulink
+x0 = [cond_ini.u0 cond_ini.aa0*cond_ini.u0 0 cond_ini.tt0 cond_ini.h];
+finaltime = 20; % tempo de duração da simulação
+StepSize = 0.01;
+reference = [cond_ini.u0 cond_ini.aa0*cond_ini.u0 0 0 cond_ini.h+50];
+val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
+
+figure()
+gg=plot(val.tout,val.h(:,:));
+set(gg,'LineWidth',1.5)
+gg=xlabel('Time (s)');
+set(gg,'Fontsize',14);
+gg=ylabel('altitude (m)');
+set(gg,'Fontsize',14);
+hold on
