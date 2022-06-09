@@ -130,7 +130,10 @@ end
 [num_df,den_df]=ss2tf(a_h,b_h,c_h,d_h,2); %df (flaps)
 [num_dsp,den_dsp]=ss2tf(a_h,b_h,c_h,d_h,3); %dsp (spoiler)
 
-%% RP2--------------------------------------------------------------------
+%% RP2 - SAE -------------------------------------------------------------
+% Tirando flaps como superficie de controlo
+b_h_sf = b_h(:,[1,3]);
+d_h_sf = d_h(:,[1,3]);
 %avaliar controlabilidade e observabilidade
 Co = ctrb(a_h,b_h);
 k_co = rank(Co);
@@ -142,18 +145,66 @@ k_ob = rank(Ob);
 % como a característica da matriz observabilidade é igual ao número de
 % estados, o sistema é observável
 
-%como o problema é o fugoide vamos realimentar a velocidade (o estado que
-%melhor traduz este modo) para a entrada do spoiler.
-num_dsp_u = num_dsp(1,:); %1- estamos a avaliar a estabilização do estado velocidade com spoiler
+% como o problema é o fugoide vamos realimentar a velocidade (o estado que
+% melhor traduz este modo) para a entrada do spoiler.
+num_dsp_u = num_dsp(1,:); %1- estamos a avaliar a estabilização do estado velocidade ar com spoiler
 sys_sp = tf(num_dsp_u,den_dsp);
-rlocus(sys_sp) %realimentação negativa - fica instável
+%rlocus(sys_sp) %realimentação negativa - fica instável
+%sgrid
 figure()
-rlocus(-sys_sp) %realimentação positiva - já fica estável
+rlocus(-sys_sp) %realimentação positiva - já fica estável tanto para fugoide e PC
+sgrid
+
+%escolhemos um K tal q os polos do fugoide apresentem pelo menos damping de
+%0.6 - vemos os polos se encontram a 45º de modo ao damping ser 0.707
+k_u_dsp = 0.538;
+k_siso = [0 -k_u_dsp;0 0; 0 0; 0 0; 0 0]; %negativo pq este k era para realimentaçao positiva
+
+damp(a_h-b_h_sf*k_siso')
+
+% reparamos q a separaçao de modos era insuficiente - a frequencia do
+% fugoide é dificil de alterar - alteramos a do PC
+
+%esta alteraçao esta por cima da realimentaçao do u para o dsp, que
+%estabiliza o fugoide
+a_h_cl_fug = a_h-b_h_sf*k_siso';
+%[num_de_2o,den_de_2o]=ss2tf(a_h_cl_fug,b_h,c_h,d_h,1); %de (elevador)
+%num_de_w = num_de_2o(2,:); %2- estamos a avaliar a estabilização do estado velocidade subida com elevator
+%sys_e = tf(num_de_w,den_de_2o);
+
+%figure()
+%rlocus(-sys_e)
+%sgrid
+%queremos um ganho tal q a frequencia do PC seja pelo menos 10 vezes
+%superiror a 0.405 (a freq max do fugoide)
+%vamos encontrar um ganho tal q a freq do PC seja 4.5 rad/s (margem)
+
+% problema - para esta freq, o damping do PC deixa de ser de nivel 1
+
+%solução: diminuimos freq do fugoide usando a realimentaçao do w para o dsp
+
+[num_dsp_2o,den_dsp_2o]=ss2tf(a_h_cl_fug,b_h,c_h,d_h,3); %dsp (spoiler)
+num_dsp_w = num_dsp_2o(2,:); %2- estamos a avaliar a estabilização do estado velocidade subida com spoiler
+sys_sp2 = tf(num_dsp_w,den_dsp_2o);
+figure()
+rlocus(sys_sp2)
+sgrid
+
+%k_w_dsp = 4; %da exatamente 10 x mais
+k_w_dsp = 4.1;
+k_siso2 = [0 -k_u_dsp;0 k_w_dsp; 0 0; 0 0; 0 0];
+damp(a_h-b_h_sf*k_siso2')
+
+
+
 
 %% LQR
-% Tirando flaps como superficie de controlo
-b_h_sf = b_h(:,[1,3]);
-d_h_sf = d_h(:,[1,3]);
+
+
+% método de bryson
+% extremos adequados u w q tt h
+%extremos =[ ]
+
 
 Q = diag([1 1 1 1 1]);
 R = 1;
