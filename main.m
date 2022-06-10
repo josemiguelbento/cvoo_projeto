@@ -146,7 +146,7 @@ k_ob = rank(Ob);
 % estados, o sistema é observável
 
 % como o problema é o fugoide vamos realimentar a velocidade (o estado que
-% melhor traduz este modo) para a entrada do spoiler.
+% melhor traduz este modo) para a entrada do spoiler. (u para dsp)
 num_dsp_u = num_dsp(1,:); %1- estamos a avaliar a estabilização do estado velocidade ar com spoiler
 sys_sp = tf(num_dsp_u,den_dsp);
 %rlocus(sys_sp) %realimentação negativa - fica instável
@@ -157,9 +157,11 @@ sgrid
 
 %escolhemos um K tal q os polos do fugoide apresentem pelo menos damping de
 %0.6 - vemos os polos se encontram a 45º de modo ao damping ser 0.707
-k_u_dsp = 0.538;
+%k_u_dsp = 0.538;
+k_u_dsp = 0.65;
 k_siso = [0 -k_u_dsp;0 0; 0 0; 0 0; 0 0]; %negativo pq este k era para realimentaçao positiva
 
+fprintf('\n\nDamp realimentação positiva de u para o dsp')
 damp(a_h-b_h_sf*k_siso')
 
 % reparamos q a separaçao de modos era insuficiente - a frequencia do
@@ -167,68 +169,103 @@ damp(a_h-b_h_sf*k_siso')
 
 %esta alteraçao esta por cima da realimentaçao do u para o dsp, que
 %estabiliza o fugoide
+% realimentação de w para o dsp
 a_h_cl_fug = a_h-b_h_sf*k_siso';
-%[num_de_2o,den_de_2o]=ss2tf(a_h_cl_fug,b_h,c_h,d_h,1); %de (elevador)
-%num_de_w = num_de_2o(2,:); %2- estamos a avaliar a estabilização do estado velocidade subida com elevator
-%sys_e = tf(num_de_w,den_de_2o);
-
-%figure()
-%rlocus(-sys_e)
-%sgrid
+[num_de_2o,den_de_2o]=ss2tf(a_h_cl_fug,b_h,c_h,d_h,3); %de (elevador)
+num_de_w = num_de_2o(2,:); %2- estamos a avaliar a estabilização do estado velocidade subida com elevator
+sys_e = tf(num_de_w,den_de_2o);
+figure()
+rlocus(sys_e)
+sgrid
 %queremos um ganho tal q a frequencia do PC seja pelo menos 10 vezes
 %superiror a 0.405 (a freq max do fugoide)
 %vamos encontrar um ganho tal q a freq do PC seja 4.5 rad/s (margem)
 
 % problema - para esta freq, o damping do PC deixa de ser de nivel 1
 
-%solução: diminuimos freq do fugoide usando a realimentaçao do w para o dsp
+% %solução: diminuimos freq do fugoide usando a realimentaçao do u para o de
+% a_h_cl_fug = a_h-b_h_sf*k_siso';
+% [num_de_3o,den_de_3o]=ss2tf(a_h_cl_fug,b_h,c_h,d_h,1); %de (elevador)
+% num_de_w = num_de_3o(1,:); %2- estamos a avaliar a estabilização do estado velocidade subida com elevator
+% sys_eu = tf(num_de_w,den_de_3o);
+% figure()
+% rlocus(sys_eu)
+% sgrid
 
-[num_dsp_2o,den_dsp_2o]=ss2tf(a_h_cl_fug,b_h,c_h,d_h,3); %dsp (spoiler)
-num_dsp_w = num_dsp_2o(2,:); %2- estamos a avaliar a estabilização do estado velocidade subida com spoiler
-sys_sp2 = tf(num_dsp_w,den_dsp_2o);
-figure()
-rlocus(sys_sp2)
-sgrid
+% solução: diminuimos freq do fugoide usando a realimentaçao do q para o de
+% a_h_cl_fug = a_h-b_h_sf*k_siso';
+% [num_de_3o,den_de_3o]=ss2tf(a_h_cl_fug,b_h,c_h,d_h,1); %de (elevador)
+% num_de_q = num_de_3o(3,:); %2- estamos a alterar pc velocidade realimentando razao picada
+% sys_eq = tf(num_de_q,den_de_3o);
+% figure()
+% rlocus(-sys_eq)
+% sgrid
+
+% %solução: diminuimos freq do fugoide usando a realimentaçao do tt para o
+% dsp
+% a_h_cl_fug = a_h-b_h_sf*k_siso';
+% [num_dsp_3o,den_dsp_3o]=ss2tf(a_h_cl_fug,b_h,c_h,d_h,3); %de (elevador)
+% num_dsp_tt = num_dsp_3o(4,:); %2- estamos a alterar pc velocidade realimentando razao picada
+% sys_tt = tf(num_dsp_tt,den_dsp_3o);
+% figure()
+% rlocus(sys_tt)
+% sgrid
 
 %k_w_dsp = 4; %da exatamente 10 x mais
 k_w_dsp = 4.1;
 k_siso2 = [0 -k_u_dsp;0 k_w_dsp; 0 0; 0 0; 0 0];
+fprintf('\n\nDamp realimentação positiva de w para o dsp')
 damp(a_h-b_h_sf*k_siso2')
 
 
+% %solução: diminuimos freq do fugoide usando a realimentaçao do w para o dsp
+% [num_dsp_2o,den_dsp_2o]=ss2tf(a_h_cl_fug,b_h,c_h,d_h,3); %dsp (spoiler)
+% num_dsp_w = num_dsp_2o(2,:); %2- estamos a avaliar a estabilização do estado velocidade subida com spoiler
+% sys_sp2 = tf(num_dsp_w,den_dsp_2o);
+% figure()
+% rlocus(sys_sp2)
+% sgrid
+% 
+% %k_w_dsp = 4; %da exatamente 10 x mais
+% k_w_dsp = 4.1;
+% k_siso2 = [0 -k_u_dsp;0 k_w_dsp; 0 0; 0 0; 0 0];
+% fprintf('\n\nDamp realimentação positiva de w para o dsp')
+% damp(a_h-b_h_sf*k_siso2')
 
 
-%% LQR
 
 
-% método de bryson
-% extremos adequados u w q tt h
-%extremos =[ ]
-
-
-Q = diag([1 1 1 1 1]);
-R = 1;
-
-K_lqr = lqr(a_h, b_h_sf, Q, R);
-
-damp(a_h-b_h_sf*K_lqr)
-
-sys_lqr = ss(a_h-b_h_sf*K_lqr, b_h_sf, c_h, d_h_sf);
-figure()
-step(sys_lqr)
-
-%definição das condicoes iniciais para o simulink
-x0 = [cond_ini.u0 cond_ini.aa0*cond_ini.u0 0 cond_ini.tt0 cond_ini.h];
-finaltime = 20; % tempo de duração da simulação
-StepSize = 0.01;
-reference = [cond_ini.u0 cond_ini.aa0*cond_ini.u0 0 0 cond_ini.h+50];
-val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
-
-figure()
-gg=plot(val.tout,val.h(:,:));
-set(gg,'LineWidth',1.5)
-gg=xlabel('Time (s)');
-set(gg,'Fontsize',14);
-gg=ylabel('altitude (m)');
-set(gg,'Fontsize',14);
-hold on
+% %% LQR
+% 
+% 
+% % método de bryson
+% % extremos adequados u w q tt h
+% %extremos =[ ]
+% 
+% 
+% Q = diag([1 1 1 1 1]);
+% R = 1;
+% 
+% K_lqr = lqr(a_h, b_h_sf, Q, R);
+% 
+% damp(a_h-b_h_sf*K_lqr)
+% 
+% sys_lqr = ss(a_h-b_h_sf*K_lqr, b_h_sf, c_h, d_h_sf);
+% figure()
+% step(sys_lqr)
+% 
+% %definição das condicoes iniciais para o simulink
+% x0 = [cond_ini.u0 cond_ini.aa0*cond_ini.u0 0 cond_ini.tt0 cond_ini.h];
+% finaltime = 20; % tempo de duração da simulação
+% StepSize = 0.01;
+% reference = [cond_ini.u0 cond_ini.aa0*cond_ini.u0 0 0 cond_ini.h+50];
+% val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
+% 
+% figure()
+% gg=plot(val.tout,val.h(:,:));
+% set(gg,'LineWidth',1.5)
+% gg=xlabel('Time (s)');
+% set(gg,'Fontsize',14);
+% gg=ylabel('altitude (m)');
+% set(gg,'Fontsize',14);
+% hold on
