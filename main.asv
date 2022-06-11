@@ -5,7 +5,7 @@ close all
 clc
 
 g = 9.81;
-
+rad = 180/pi;
 %vamos buscar os dados da aeronave (planador Ximas), dados no enunciado
 %funcao def_model() definida noutro ficheiro
 [cond_ini, max_deflec, inert, wing, deriv] = def_model();
@@ -53,7 +53,23 @@ Mdsp_til = deriv.mdsp+deriv.mwp*deriv.zdsp/(1-deriv.zwp);
 % 
 % d = zeros(size(b));
 
+a = [
+    deriv.xu deriv.xw -w0 -g*cos(cond_ini.tt0);
+    Zu_til  Zw_til Zq_til Ztt_til;
+    Mu_til Mw_til Mq_til Mtt_til;
+    0 0 1 0;
+    ];
 
+b_sf = [
+    deriv.xde deriv.xdsp;
+    Zde_til Z_dsp_til;
+    Mde_til Mdsp_til;
+    0 0;
+    ];
+
+c = eye(size(a));
+
+d = zeros(size(b_sf));
 
 %vamos definir a matriz da dinâmica, a_h, com entradas (incluindo h):
 %   x_h = [u; w; q; tt; h]
@@ -166,7 +182,7 @@ damp(a_h-b_h_sf*k_siso')
 
 % realimentação de w para o dsp
 a_h_cl_fug = a_h-b_h_sf*k_siso';
-[num_de_2o,den_de_2o]=ss2tf(a_h_cl_fug,b_h,c_h,d_h,3); %de (elevador)
+[num_de_2o,den_de_2o]=ss2tf(a_h_cl_fug,b_h,c_h,d_h,3); %dsp (spoiler)
 num_de_w = num_de_2o(2,:); %2- estamos a avaliar a estabilização do estado velocidade subida com elevator
 sys_e = tf(num_de_w,den_de_2o);
 figure()
@@ -196,8 +212,11 @@ a_h_SAE = a_h-b_h_sf*k_siso2';
 %extremos =[ ]
 % 
 
-Q = diag([1 1 1 1 1]);
-R = diag([1 1]);
+%Q = diag([1 1 1 1 1]);
+%R = diag([100000 100000]);
+
+Q = diag([0.111 0.444 3.65 8.21 0.0444]);
+R = diag([131.31 131.31]);
 
 K_lqr = lqr(a_h_SAE, b_h_sf, Q, R);
 
@@ -213,50 +232,61 @@ h_ref = 50;
 val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
 %plots
-figure()
+f=figure();
+f.Position = [50 100 1500 450];
+
 subplot(3,3,1)
 gg=plot(val.tout,val.u(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
-set(gg,'Fontsize',14);
+
 gg=ylabel('velocidade ar (m/s)');
-set(gg,'Fontsize',14);
+
 
 subplot(3,3,2)
 gg=plot(val.tout,val.w(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
-set(gg,'Fontsize',14);
+
 gg=ylabel('velocidade subida (m/s)');
-set(gg,'Fontsize',14);
+
 
 subplot(3,3,3)
 gg=plot(val.tout,val.q(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
-set(gg,'Fontsize',14);
+
 gg=ylabel('razão de picada (rad/s)');
-set(gg,'Fontsize',14);
+
 
 subplot(3,3,4)
-gg=plot(val.tout,val.tt(:,:));
+gg=plot(val.tout,rad*val.tt(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
-set(gg,'Fontsize',14);
-gg=ylabel('angulo de picada (rad)');
-set(gg,'Fontsize',14);
 
-subplot(3,3,4)
-gg=plot(val.tout,val.tt(:,:));
+gg=ylabel('angulo de picada (deg)');
+
+
+subplot(3,3,5)
+gg=plot(val.tout,rad*val.de(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
-set(gg,'Fontsize',14);
-gg=ylabel('angulo de picada (rad)');
-set(gg,'Fontsize',14);
-subplot(3,3,[5,6])
+
+gg=ylabel('elevator (deg)');
+
+
+subplot(3,3,6)
+gg=plot(val.tout,rad*val.dsp(:,:));
+set(gg,'LineWidth',1.5)
+gg=xlabel('Time (s)');
+
+gg=ylabel('spoiler (deg)');
+
+
+subplot(3,3,[7,8,9])
 gg=plot(val.tout,val.h(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
-set(gg,'Fontsize',14);
+
 gg=ylabel('altitude (m)');
-set(gg,'Fontsize',14);
+

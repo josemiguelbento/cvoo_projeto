@@ -5,7 +5,7 @@ close all
 clc
 
 g = 9.81;
-
+rad = 180/pi;
 %vamos buscar os dados da aeronave (planador Ximas), dados no enunciado
 %funcao def_model() definida noutro ficheiro
 [cond_ini, max_deflec, inert, wing, deriv] = def_model();
@@ -53,7 +53,23 @@ Mdsp_til = deriv.mdsp+deriv.mwp*deriv.zdsp/(1-deriv.zwp);
 % 
 % d = zeros(size(b));
 
+a = [
+    deriv.xu deriv.xw -w0 -g*cos(cond_ini.tt0);
+    Zu_til  Zw_til Zq_til Ztt_til;
+    Mu_til Mw_til Mq_til Mtt_til;
+    0 0 1 0;
+    ];
 
+b_sf = [
+    deriv.xde deriv.xdsp;
+    Zde_til Z_dsp_til;
+    Mde_til Mdsp_til;
+    0 0;
+    ];
+
+c = eye(size(a));
+
+d_sf = zeros(size(b_sf));
 
 %vamos definir a matriz da dinâmica, a_h, com entradas (incluindo h):
 %   x_h = [u; w; q; tt; h]
@@ -182,7 +198,7 @@ damp(a_h-b_h_sf*k_siso2')
 
 sys_SAE = ss(a_h-b_h_sf*k_siso2', b_h_sf, c_h, d_h_sf);
 figure()
-t_final_step = 20;
+t_final_step = 100;
 opt = stepDataOptions('InputOffset',0,'StepAmplitude',2/180*pi);
 
 step(sys_SAE, t_final_step,opt)
@@ -196,16 +212,20 @@ a_h_SAE = a_h-b_h_sf*k_siso2';
 %extremos =[ ]
 % 
 
-Q = diag([1 1 1 1 1]);
-R = diag([1 1]);
+%Q = diag([1 1 1 1 1]);
+%R = diag([100000 100000]);
+
+Q = diag([0.111 0.444 3.65 8.21 0.0444]);
+R = diag([131.31 131.31]);
 
 K_lqr = lqr(a_h_SAE, b_h_sf, Q, R);
 
 %damp(a_h_SAE-b_h_sf*K_lqr) %caracteristica do anel fechado do lqr por cima do SAE
 
 %definição das condicoes iniciais para o simulink
-x0 = [0 0 0 0 0];
-finaltime = 20; % tempo de duração da simulação
+x0 = [0 0 0 0];
+x0_h = [0 0 0 0 0];
+finaltime = 100; % tempo de duração da simulação
 StepSize = 0.01;
 
 
@@ -241,27 +261,27 @@ gg=ylabel('razão de picada (rad/s)');
 
 
 subplot(3,3,4)
-gg=plot(val.tout,val.tt(:,:));
+gg=plot(val.tout,rad*val.tt(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
 
-gg=ylabel('angulo de picada (rad)');
+gg=ylabel('angulo de picada (deg)');
 
 
 subplot(3,3,5)
-gg=plot(val.tout,val.de(:,:));
+gg=plot(val.tout,rad*val.de(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
 
-gg=ylabel('elevator (rad)');
+gg=ylabel('elevator (deg)');
 
 
 subplot(3,3,6)
-gg=plot(val.tout,val.dsp(:,:));
+gg=plot(val.tout,rad*val.dsp(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
 
-gg=ylabel('spoiler (rad)');
+gg=ylabel('spoiler (deg)');
 
 
 subplot(3,3,[7,8,9])
