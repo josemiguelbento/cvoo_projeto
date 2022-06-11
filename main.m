@@ -166,7 +166,7 @@ damp(a_h-b_h_sf*k_siso')
 
 % realimentação de w para o dsp
 a_h_cl_fug = a_h-b_h_sf*k_siso';
-[num_de_2o,den_de_2o]=ss2tf(a_h_cl_fug,b_h,c_h,d_h,3); %de (elevador)
+[num_de_2o,den_de_2o]=ss2tf(a_h_cl_fug,b_h,c_h,d_h,3); %dsp (spoiler)
 num_de_w = num_de_2o(2,:); %2- estamos a avaliar a estabilização do estado velocidade subida com elevator
 sys_e = tf(num_de_w,den_de_2o);
 figure()
