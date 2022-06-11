@@ -6,6 +6,8 @@ clc
 
 g = 9.81;
 rad = 180/pi;
+kn = 0.514444444;
+deg = pi/180;
 %vamos buscar os dados da aeronave (planador Ximas), dados no enunciado
 %funcao def_model() definida noutro ficheiro
 [cond_ini, max_deflec, inert, wing, deriv] = def_model();
@@ -205,7 +207,31 @@ step(sys_SAE, t_final_step,opt)
 
 a_h_SAE = a_h-b_h_sf*k_siso2';
 %% LQR
+% x = [u; w; q; tt; h; u_i; h_i]
 
+a_h_int = [
+    deriv.xu deriv.xw -w0 -g*cos(cond_ini.tt0) 0 0 0;
+    Zu_til  Zw_til Zq_til Ztt_til 0 0 0;
+    Mu_til Mw_til Mq_til Mtt_til 0 0 0;
+    0 0 1 0 0 0 0;
+    0 -1 0 cond_ini.u0 0 0 0;
+    1 0 0 0 0 0 0;
+    0 0 0 0 1 0 0;
+    ];
+
+b_h_sf_int = [
+    deriv.xde deriv.xdsp;
+    Zde_til Z_dsp_til;
+    Mde_til Mdsp_til;
+    0 0;
+    0 0;
+    0 0;
+    0 0;
+    ];
+
+c_h_int = eye(size(a_h_int));
+
+d_h_sf_int = zeros(size(b_h_sf_int));
 
 % método de bryson
 % extremos adequados u w q tt h
@@ -215,11 +241,31 @@ a_h_SAE = a_h-b_h_sf*k_siso2';
 %Q = diag([1 1 1 1 1]);
 %R = diag([100000 100000]);
 
-Q = diag([0.111 0.444 3.65 8.21 0.0444]);
-R = diag([131.31 131.31]);
+%Q = diag([0.111 0.444 3.65 8.21 0.0444]);
+%R = diag([131.31 131.31]);
 
-K_lqr = lqr(a_h_SAE, b_h_sf, Q, R);
+% Arbirtary values
 
+du_max=1*kn; %kn to m/s;
+dw_max=0.7*kn; %kn to m/s;
+dq_max=2*deg; %deg/s to rad/s
+dtt_max=7*deg; %deg to rad
+dh_max=5; %m
+
+% Matrices for LQR control
+% Bryson Method
+% sem integrador
+% Q = diag([1/du_max^2 1/dw_max^2 1/dq_max^2 1/dtt_max^2 1/dh_max^2]);
+% R = diag([1/max_deflec.demin^2 1/max_deflec.spmax^2]);
+% 
+% K_lqr = lqr(a_h, b_h_sf, Q, R);
+
+Q = diag([1/du_max^2 1/dw_max^2 10/dq_max^2 1/dtt_max^2 1/dh_max^2 0.1/du_max^2 0.1/dh_max^2]);
+R = diag([1/max_deflec.demin^2 1/max_deflec.spmax^2]);
+
+K_lqr = lqr(a_h_int, b_h_sf_int, Q, R);
+
+damp(a_h_int-b_h_sf_int*K_lqr)
 %damp(a_h_SAE-b_h_sf*K_lqr) %caracteristica do anel fechado do lqr por cima do SAE
 
 %definição das condicoes iniciais para o simulink
@@ -229,7 +275,8 @@ finaltime = 100; % tempo de duração da simulação
 StepSize = 0.01;
 
 
-h_ref = 50;
+h_ref = 25;
+u_ref = -5;
 val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
 %plots
