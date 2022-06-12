@@ -246,11 +246,11 @@ d_h_sf_int = zeros(size(b_h_sf_int));
 
 % Arbirtary values
 
-du_max=1*kn; %kn to m/s;
-dw_max=0.7*kn; %kn to m/s;
-dq_max=2*deg; %deg/s to rad/s
-dtt_max=7*deg; %deg to rad
-dh_max=5; %m
+du_max=0.5; %m/s
+dw_max=0.2; %m/s;
+dq_max=5*deg; %deg/s to rad/s
+dtt_max=5*deg; %deg to rad
+dh_max=0.5; %m
 
 % Matrices for LQR control
 % Bryson Method
@@ -260,25 +260,31 @@ dh_max=5; %m
 % 
 % K_lqr = lqr(a_h, b_h_sf, Q, R);
 
-Q = diag([1/du_max^2 1/dw_max^2 10/dq_max^2 1/dtt_max^2 1/dh_max^2 0.1/du_max^2 0.1/dh_max^2]);
+%Q = diag([1/du_max^2 1/dw_max^2 10/dq_max^2 1/dtt_max^2 1/dh_max^2 0.1/du_max^2 0.1/dh_max^2]);
+%R = diag([1/max_deflec.demin^2 1/max_deflec.spmax^2]);
+
+%muito fixes
+%Q = diag([1 32.8281 525.2490 364.7563 1 0.01 0.01]);
+%R = diag([364.7563 25]);
+
+Q = diag([1/du_max^2 1/dw_max^2 1/dq_max^2 1/dtt_max^2 1/dh_max^2 0.01/du_max^2 0.01/dh_max^2]);
 R = diag([1/max_deflec.demin^2 1/max_deflec.spmax^2]);
 
 K_lqr = lqr(a_h_int, b_h_sf_int, Q, R);
 
+fprintf('\n\nDamp com o LQR')
 damp(a_h_int-b_h_sf_int*K_lqr)
 %damp(a_h_SAE-b_h_sf*K_lqr) %caracteristica do anel fechado do lqr por cima do SAE
 
 %definição das condicoes iniciais para o simulink
 x0 = [0 0 0 0];
-%x0 = [cond_ini.u0;w0;cond_ini.q0;cond_ini.tt0]
 x0_h = [0 0 0 0 0];
-%x0_h = [cond_ini.u0;w0;cond_ini.q0;cond_ini.tt0;cond_ini.h0]
 finaltime = 100; % tempo de duração da simulação
 StepSize = 0.01;
 
 
-%h_ref = 25;
-h_ref = 5*cond_ini.u0;
+h_ref = 10;
+%h_ref = 5*cond_ini.u0;
 u_ref = -5;
 val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
