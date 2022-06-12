@@ -213,16 +213,16 @@ finaltime = 100; % tempo de duração da simulação
 StepSize = 0.01;
 
 t_de_ini = 1;
-de_step = 1*pi/180;
-t_de_step = 2;
+de_step = 2*pi/180;
+t_de_step = 10;
 
-t_dsp_ini = 50;
-dsp_step = 20*pi/180;
+t_dsp_ini = 20;
+dsp_step = 0*pi/180;
 t_dsp_step = 10;
 
 val_sae=sim('cvoo_g19_sae','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
-plots_sae(val_sae)
+plots(val_sae)
 
 %% LQR
 % x = [u; w; q; tt; h; u_i; h_i]
@@ -285,7 +285,7 @@ dh_max=0.5; %m
 %Q = diag([1 32.8281 525.2490 364.7563 1 0.01 0.01]);
 %R = diag([364.7563 25]);
 
-Q = diag([1/du_max^2 1/dw_max^2 1/dq_max^2 1/dtt_max^2 1/dh_max^2 0.1/du_max^2 0.1/dh_max^2]);
+Q = diag([1/du_max^2 1/dw_max^2 1/dq_max^2 1/dtt_max^2 1/dh_max^2 0.01/du_max^2 0.01/dh_max^2]);
 R = diag([1/max_deflec.demin^2 1/max_deflec.spmax^2]);
 
 K_lqr = lqr(a_h_int, b_h_sf_int, Q, R);
@@ -306,5 +306,61 @@ u_ref = -5;
 val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
 %plots
-plots(val)
+f=figure();
+f.Position = [50 100 1500 450];
+
+subplot(3,3,1)
+gg=plot(val.tout,val.u(:,:));
+set(gg,'LineWidth',1.5)
+gg=xlabel('Time (s)');
+
+gg=ylabel('velocidade ar (m/s)');
+
+
+subplot(3,3,2)
+gg=plot(val.tout,val.w(:,:));
+set(gg,'LineWidth',1.5)
+gg=xlabel('Time (s)');
+
+gg=ylabel('velocidade subida (m/s)');
+
+
+subplot(3,3,3)
+gg=plot(val.tout,val.q(:,:));
+set(gg,'LineWidth',1.5)
+gg=xlabel('Time (s)');
+
+gg=ylabel('razão de picada (rad/s)');
+
+
+subplot(3,3,4)
+gg=plot(val.tout,rad*val.tt(:,:));
+set(gg,'LineWidth',1.5)
+gg=xlabel('Time (s)');
+
+gg=ylabel('angulo de picada (deg)');
+
+
+subplot(3,3,5)
+gg=plot(val.tout,rad*val.de(:,:));
+set(gg,'LineWidth',1.5)
+gg=xlabel('Time (s)');
+
+gg=ylabel('elevator (deg)');
+
+
+subplot(3,3,6)
+gg=plot(val.tout,rad*val.dsp(:,:));
+set(gg,'LineWidth',1.5)
+gg=xlabel('Time (s)');
+
+gg=ylabel('spoiler (deg)');
+
+
+subplot(3,3,[7,8,9])
+gg=plot(val.tout,val.h(:,:));
+set(gg,'LineWidth',1.5)
+gg=xlabel('Time (s)');
+
+gg=ylabel('altitude (m)');
 
