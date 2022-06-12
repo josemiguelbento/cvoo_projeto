@@ -4,11 +4,12 @@ function [cond_ini, max_deflec, inert, wing, deriv] = def_model()
     kn = 0.514444444; %1 kn = 0.514444444 m/s
     
     %Initial flight condition
-    cond_ini.h =50;
+    cond_ini.h0 =50;
     cond_ini.aa0 =3.84 *deg ;
     cond_ini.gg0 =0 *deg ;
     cond_ini.tt0 = cond_ini.aa0 + cond_ini.gg0;
     cond_ini.u0 =66.1 *kn ;
+    cond_ini.q0 = 0;
     cond_ini.flaps =5 *deg;
     cond_ini.de0 = -7.44 *deg ;
     cond_ini.da0 =0.58 *deg ;

@@ -270,12 +270,15 @@ damp(a_h_int-b_h_sf_int*K_lqr)
 
 %definição das condicoes iniciais para o simulink
 x0 = [0 0 0 0];
+%x0 = [cond_ini.u0;w0;cond_ini.q0;cond_ini.tt0]
 x0_h = [0 0 0 0 0];
+%x0_h = [cond_ini.u0;w0;cond_ini.q0;cond_ini.tt0;cond_ini.h0]
 finaltime = 100; % tempo de duração da simulação
 StepSize = 0.01;
 
 
-h_ref = 25;
+%h_ref = 25;
+h_ref = 5*cond_ini.u0;
 u_ref = -5;
 val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
