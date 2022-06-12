@@ -166,11 +166,11 @@ k_ob = rank(Ob);
 % como o problema é o fugoide vamos realimentar a velocidade (o estado que
 % melhor traduz este modo) para a entrada do spoiler. (u para dsp)
 num_dsp_u = num_dsp(1,:); %1- estamos a avaliar a estabilização do estado velocidade ar com spoiler
-sys_sp = tf(num_dsp_u,den_dsp);
+sys_usp = tf(num_dsp_u,den_dsp);
 %rlocus(sys_sp) %realimentação negativa - fica instável
 %sgrid
 figure()
-rlocus(-sys_sp) %realimentação positiva - já fica estável tanto para fugoide e PC
+rlocus(-sys_usp) %realimentação positiva - já fica estável tanto para fugoide e PC
 sgrid
 
 %escolhemos um K tal q os polos do fugoide apresentem pelo menos damping de
@@ -184,11 +184,11 @@ damp(a_h-b_h_sf*k_siso')
 
 % realimentação de w para o dsp
 a_h_cl_fug = a_h-b_h_sf*k_siso';
-[num_de_2o,den_de_2o]=ss2tf(a_h_cl_fug,b_h,c_h,d_h,3); %dsp (spoiler)
-num_de_w = num_de_2o(2,:); %2- estamos a avaliar a estabilização do estado velocidade subida com elevator
-sys_e = tf(num_de_w,den_de_2o);
+[num_dsp_2o,den_dsp_2o]=ss2tf(a_h_cl_fug,b_h,c_h,d_h,3); %dsp (spoiler)
+num_dsp_w = num_dsp_2o(2,:); %2- estamos a avaliar a estabilização do estado velocidade subida com elevator
+sys_wsp = tf(num_dsp_w,den_dsp_2o);
 figure()
-rlocus(sys_e)
+rlocus(sys_wsp)
 sgrid
 
 %k_w_dsp = 4; %da exatamente 10 x mais
