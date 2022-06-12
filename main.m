@@ -217,7 +217,7 @@ de_step = 1*pi/180;
 t_de_step = 2;
 
 t_dsp_ini = 50;
-dsp_step = 20*pi/180;
+dsp_step = 10*pi/180;
 t_dsp_step = 10;
 
 val_sae=sim('cvoo_g19_sae','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
@@ -297,11 +297,11 @@ damp(a_h_int-b_h_sf_int*K_lqr)
 %definição das condicoes iniciais para o simulink
 x0 = [0 0 0 0];
 x0_h = [0 0 0 0 0];
-finaltime = 100; % tempo de duração da simulação
+finaltime = 60; % tempo de duração da simulação
 StepSize = 0.01;
 
 
-h_ref = 10;
+h_ref = -10;
 u_ref = -5;
 val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
