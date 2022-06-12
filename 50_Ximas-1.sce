@@ -123,11 +123,21 @@ B = [
     Mde_til Mdf_til Mdsp_til;
     0 0 0;
     ];
+    
+// Definicao da matriz do controlo B, com entradas de controlo:
+//  u = [de; dsp]
+B_sf = [
+    xde xdsp;
+    Zde_til Z_dsp_til;
+    Mde_til Mdsp_til;
+    0 0;
+    ];
 
 // Definicao das matrizes C e D, assumindo y = x (a saída  
 // é o próprio estado)
 C = eye(A)
 D = zeros(B)
+D_sf = zeros(B_sf)
 
 
 // Criacao de sistema dinamico linear do tipo xp=Ax+Bu, com saida yp=Cx+Du
@@ -238,11 +248,11 @@ disp(zz_lqr)
 // Definição das Condicoes Iniciais para o XCOS
 x0 = [0 0 0 0]
 x0_h = [0 0 0 0 0]
-finaltime = 100 // tempo de duração da simulação
+finaltime = 1000 // tempo de duração da simulação
 StepSize = 0.01
 
 
-h_ref = 10
+h_ref = -10
 //h_ref = 5*cond_ini.u0;
 u_ref = -5
 
@@ -253,10 +263,8 @@ u_ref = -5
 
 sim_lqr = importXcosDiagram("C:\Users\franc\OneDrive\Documentos\GitHub\cvoo_projeto\sim_lqr.zcos")
 
-typeof(sim_lqr) //The diagram data structure
-
 //first batch simulation with the parameters embedded in the diagram
-xcos_simulate(sim_lqr, 4);
+xcos_simulate(sim_lqr, 4)
 
 
 
