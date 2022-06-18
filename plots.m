@@ -19,7 +19,7 @@ gg=xlabel('Time (s)');
 gg=ylabel('spoiler (deg)');
 
 
-subplot(3,3,[4,5])
+subplot(3,3,4)
 gg=plot(val.tout,val.u(:,:),val.tout,val.u_ref(:,:));
 legend('state','reference');
 set(gg,'LineWidth',1.5)
@@ -28,12 +28,21 @@ gg=xlabel('Time (s)');
 gg=ylabel('velocidade ar (m/s)');
 
 
+subplot(3,3,5)
+gg=plot(val.tout,val.h_pt(:,:));
+set(gg,'LineWidth',1.5)
+gg=xlabel('Time (s)');
+
+gg=ylabel('velocidade subida (m/s)');
+
+
+
 subplot(3,3,7)
 gg=plot(val.tout,val.w(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
 
-gg=ylabel('velocidade subida (m/s)');
+gg=ylabel('velocidade vertical (m/s)');
 
 
 subplot(3,3,8)

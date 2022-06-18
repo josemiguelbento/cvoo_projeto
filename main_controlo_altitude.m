@@ -31,29 +31,8 @@ Mdf_til = deriv.mdf+deriv.mwp*deriv.zdf/(1-deriv.zwp);
 Mdsp_til = deriv.mdsp+deriv.mwp*deriv.zdsp/(1-deriv.zwp);
 
 
-% %vamos definir a matriz da dinâmica tradicional, a, com entradas:
-% %   x = [u; w; q; tt]
-% a = [
-%     deriv.xu deriv.xw -w0 -g*cos(cond_ini.tt0);
-%     Zu_til  Zw_til Zq_til Ztt_til;
-%     Mu_til Mw_til Mq_til Mtt_til;
-%     0 0 1 0;
-%     ];
-% 
-% %vamos definir a matriz do controlo b, com entradas de controlo:
-% %   u = [de; df; dsp]
-% b = [
-%     deriv.xde deriv.xdf deriv.xdsp;
-%     Zde_til Zdf_til Z_dsp_til;
-%     Mde_til Mdf_til Mdsp_til;
-%     0 0 0;
-%     ];
-% 
-% %as matrizes c e d ficam então definidas, assumindo y = x (a saída é o 
-% %próprio estado)
-% c = eye(size(a));
-% 
-% d = zeros(size(b));
+%vamos definir a matriz da dinâmica tradicional, a, com entradas:
+%   x = [u; w; q; tt]
 
 a = [
     deriv.xu deriv.xw -w0 -g*cos(cond_ini.tt0);
@@ -62,6 +41,9 @@ a = [
     0 0 1 0;
     ];
 
+%vamos definir a matriz do controlo b, com entradas de controlo:
+%   u = [de; dsp]
+
 b_sf = [
     deriv.xde deriv.xdsp;
     Zde_til Z_dsp_til;
@@ -69,6 +51,8 @@ b_sf = [
     0 0;
     ];
 
+%as matrizes c e d ficam então definidas, assumindo y = x (a saída é o 
+%próprio estado)
 c = eye(size(a));
 
 d_sf = zeros(size(b_sf));
@@ -102,6 +86,7 @@ d_h = zeros(size(b_h));
 
 %vamos analisar as características dinâmicas do sistema, nomeadamente a
 %localização dos pólos e as suas frequências naturais e amortecimento
+fprintf('\n\nDamp do sistema inicial')
 damp(a_h)
 %como se pode verificar há dois pólos instáveis (no semiplano complexo 
 %direito)
@@ -166,16 +151,14 @@ k_ob = rank(Ob);
 % como o problema é o fugoide vamos realimentar a velocidade (o estado que
 % melhor traduz este modo) para a entrada do spoiler. (u para dsp)
 num_dsp_u = num_dsp(1,:); %1- estamos a avaliar a estabilização do estado velocidade ar com spoiler
-sys_sp = tf(num_dsp_u,den_dsp);
-%rlocus(sys_sp) %realimentação negativa - fica instável
-%sgrid
+sys_usp = tf(num_dsp_u,den_dsp);
 figure()
-rlocus(-sys_sp) %realimentação positiva - já fica estável tanto para fugoide e PC
+rlocus(-sys_usp) %realimentação positiva - já fica estável tanto para fugoide e PC
 sgrid
 
 %escolhemos um K tal q os polos do fugoide apresentem pelo menos damping de
-%0.6 - vemos os polos se encontram a 45º de modo ao damping ser 0.707
-%k_u_dsp = 0.538;
+%0.6
+
 k_u_dsp = 0.65;
 k_siso = [0 -k_u_dsp;0 0; 0 0; 0 0; 0 0]; %negativo pq este k era para realimentaçao positiva
 
@@ -184,14 +167,13 @@ damp(a_h-b_h_sf*k_siso')
 
 % realimentação de w para o dsp
 a_h_cl_fug = a_h-b_h_sf*k_siso';
-[num_de_2o,den_de_2o]=ss2tf(a_h_cl_fug,b_h,c_h,d_h,3); %dsp (spoiler)
-num_de_w = num_de_2o(2,:); %2- estamos a avaliar a estabilização do estado velocidade subida com elevator
-sys_e = tf(num_de_w,den_de_2o);
+[num_dsp_2o,den_dsp_2o]=ss2tf(a_h_cl_fug,b_h,c_h,d_h,3); %dsp (spoiler)
+num_dsp_w = num_dsp_2o(2,:); %2- estamos a avaliar a estabilização do estado velocidade subida com elevator
+sys_wsp = tf(num_dsp_w,den_dsp_2o);
 figure()
-rlocus(sys_e)
+rlocus(sys_wsp)
 sgrid
 
-%k_w_dsp = 4; %da exatamente 10 x mais
 k_w_dsp = 4.1;
 k_siso2 = [0 -k_u_dsp;0 k_w_dsp; 0 0; 0 0; 0 0];
 fprintf('\n\nDamp realimentação positiva de w para o dsp')
@@ -201,7 +183,7 @@ damp(a_h-b_h_sf*k_siso2')
 sys_SAE = ss(a_h-b_h_sf*k_siso2', b_h_sf, c_h, d_h_sf);
 figure()
 t_final_step = 100;
-opt = stepDataOptions('InputOffset',0,'StepAmplitude',2/180*pi);
+opt = stepDataOptions('InputOffset',0,'StepAmplitude',1/180*pi);
 
 step(sys_SAE, t_final_step,opt)
 
@@ -209,24 +191,27 @@ a_h_SAE = a_h-b_h_sf*k_siso2';
 
 %definição das condicoes iniciais para o simulink
 x0_h = [0 0 0 0 0];
-finaltime = 100; % tempo de duração da simulação
+finaltime = 100; % tempo de duração da simulação sistema com SAE
 StepSize = 0.01;
 
+%definição dos retângulos de input
 t_de_ini = 1;
-de_step = 2*pi/180;
-t_de_step = 10;
+de_step = 1*pi/180;
+t_de_step = 2;
 
-t_dsp_ini = 20;
-dsp_step = 0*pi/180;
+t_dsp_ini = 50;
+dsp_step = 10*pi/180;
 t_dsp_step = 10;
 
 val_sae=sim('cvoo_g19_sae','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
-plots(val_sae)
+plots_sae(val_sae)
 
 %% LQR
 % x = [u; w; q; tt; h; u_i; h_i]
 
+%definiçao de novas matrizes do estado aumentado com altitude e
+%integradores
 a_h_int = [
     deriv.xu deriv.xw -w0 -g*cos(cond_ini.tt0) 0 0 0;
     Zu_til  Zw_til Zq_til Ztt_til 0 0 0;
@@ -251,41 +236,18 @@ c_h_int = eye(size(a_h_int));
 
 d_h_sf_int = zeros(size(b_h_sf_int));
 
-% método de bryson
-% extremos adequados u w q tt h
-%extremos =[ ]
-% 
-
-%Q = diag([1 1 1 1 1]);
-%R = diag([100000 100000]);
-
-%Q = diag([0.111 0.444 3.65 8.21 0.0444]);
-%R = diag([131.31 131.31]);
-
-% Arbirtary values
-
+% Matrices for LQR control
+% Bryson Method
+% extremos adequados para u w q tt h
 du_max=0.5; %m/s
 dw_max=0.2; %m/s;
 dq_max=5*deg; %deg/s to rad/s
 dtt_max=5*deg; %deg to rad
 dh_max=0.5; %m
 
-% Matrices for LQR control
-% Bryson Method
-% sem integrador
-% Q = diag([1/du_max^2 1/dw_max^2 1/dq_max^2 1/dtt_max^2 1/dh_max^2]);
-% R = diag([1/max_deflec.demin^2 1/max_deflec.spmax^2]);
-% 
-% K_lqr = lqr(a_h, b_h_sf, Q, R);
+% extremos usados na matriz R explícitos no enunciado
 
-%Q = diag([1/du_max^2 1/dw_max^2 10/dq_max^2 1/dtt_max^2 1/dh_max^2 0.1/du_max^2 0.1/dh_max^2]);
-%R = diag([1/max_deflec.demin^2 1/max_deflec.spmax^2]);
-
-%muito fixes
-%Q = diag([1 32.8281 525.2490 364.7563 1 0.01 0.01]);
-%R = diag([364.7563 25]);
-
-Q = diag([1/du_max^2 1/dw_max^2 1/dq_max^2 1/dtt_max^2 1/dh_max^2 0.01/du_max^2 0.01/dh_max^2]);
+Q = diag([1/du_max^2 1/dw_max^2 1/dq_max^2 1/dtt_max^2 1/dh_max^2 0.1/du_max^2 0.1/dh_max^2]);
 R = diag([1/max_deflec.demin^2 1/max_deflec.spmax^2]);
 
 K_lqr = lqr(a_h_int, b_h_sf_int, Q, R);
@@ -297,70 +259,14 @@ damp(a_h_int-b_h_sf_int*K_lqr)
 %definição das condicoes iniciais para o simulink
 x0 = [0 0 0 0];
 x0_h = [0 0 0 0 0];
-finaltime = 100; % tempo de duração da simulação
+finaltime = 60; % tempo de duração da simulação
 StepSize = 0.01;
 
 
-h_ref = 10;
+h_ref = -10;
 u_ref = -5;
 val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
 %plots
-f=figure();
-f.Position = [50 100 1500 450];
-
-subplot(3,3,1)
-gg=plot(val.tout,val.u(:,:));
-set(gg,'LineWidth',1.5)
-gg=xlabel('Time (s)');
-
-gg=ylabel('velocidade ar (m/s)');
-
-
-subplot(3,3,2)
-gg=plot(val.tout,val.w(:,:));
-set(gg,'LineWidth',1.5)
-gg=xlabel('Time (s)');
-
-gg=ylabel('velocidade subida (m/s)');
-
-
-subplot(3,3,3)
-gg=plot(val.tout,val.q(:,:));
-set(gg,'LineWidth',1.5)
-gg=xlabel('Time (s)');
-
-gg=ylabel('razão de picada (rad/s)');
-
-
-subplot(3,3,4)
-gg=plot(val.tout,rad*val.tt(:,:));
-set(gg,'LineWidth',1.5)
-gg=xlabel('Time (s)');
-
-gg=ylabel('angulo de picada (deg)');
-
-
-subplot(3,3,5)
-gg=plot(val.tout,rad*val.de(:,:));
-set(gg,'LineWidth',1.5)
-gg=xlabel('Time (s)');
-
-gg=ylabel('elevator (deg)');
-
-
-subplot(3,3,6)
-gg=plot(val.tout,rad*val.dsp(:,:));
-set(gg,'LineWidth',1.5)
-gg=xlabel('Time (s)');
-
-gg=ylabel('spoiler (deg)');
-
-
-subplot(3,3,[7,8,9])
-gg=plot(val.tout,val.h(:,:));
-set(gg,'LineWidth',1.5)
-gg=xlabel('Time (s)');
-
-gg=ylabel('altitude (m)');
+plots(val)
 

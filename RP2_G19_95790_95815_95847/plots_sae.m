@@ -1,25 +1,18 @@
 function []=plots_sae(val)
 %plots
 f=figure();
-f.Position = [50 100 800 800];
+f.Position = [50 100 1500 450];
 
-subplot(4,2,1)
-gg=plot(val.tout,180/pi*val.de_step(:,:));
+subplot(2,3,1)
+gg=plot(val.tout,180/pi*val.de_step(:,:),val.tout, 180/pi*val.dsp_step(:,:));
+legend('elevator','spoiler');
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
 
-gg=ylabel('step input elevator (deg)');
+gg=ylabel('entradas em degrau (deg)');
 
 
-subplot(4,2,2)
-gg=plot(val.tout,180/pi*val.dsp_step(:,:));
-set(gg,'LineWidth',1.5)
-gg=xlabel('Time (s)');
-
-gg=ylabel('step input spoiler (deg)');
-
-
-subplot(4,2,3)
+subplot(2,3,2)
 gg=plot(val.tout,val.u(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
@@ -27,7 +20,7 @@ gg=xlabel('Time (s)');
 gg=ylabel('velocidade ar (m/s)');
 
 
-subplot(4,2,4)
+subplot(2,3,3)
 gg=plot(val.tout,val.w(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
@@ -35,7 +28,7 @@ gg=xlabel('Time (s)');
 gg=ylabel('velocidade subida (m/s)');
 
 
-subplot(4,2,5)
+subplot(2,3,4)
 gg=plot(val.tout,val.q(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
@@ -43,7 +36,7 @@ gg=xlabel('Time (s)');
 gg=ylabel('razão de picada (rad/s)');
 
 
-subplot(4,2,6)
+subplot(2,3,5)
 gg=plot(val.tout,180/pi*val.tt(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
@@ -51,8 +44,7 @@ gg=xlabel('Time (s)');
 gg=ylabel('angulo de picada (deg)');
 
 
-
-subplot(4,2,[7)
+subplot(2,3,6)
 gg=plot(val.tout,val.h(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');

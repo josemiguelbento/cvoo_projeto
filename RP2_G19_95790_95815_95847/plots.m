@@ -19,8 +19,9 @@ gg=xlabel('Time (s)');
 gg=ylabel('spoiler (deg)');
 
 
-subplot(3,3,[1,2])
-gg=plot(val.tout,val.u(:,:));
+subplot(3,3,[4,5])
+gg=plot(val.tout,val.u(:,:),val.tout,val.u_ref(:,:));
+legend('state','reference');
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
 
@@ -40,7 +41,7 @@ gg=plot(val.tout,val.q(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
 
-gg=ylabel('razão de picada (rad/s)');
+gg=ylabel('razão picada (rad/s)');
 
 
 subplot(3,3,9)
@@ -51,9 +52,9 @@ gg=xlabel('Time (s)');
 gg=ylabel('angulo de picada (deg)');
 
 
-subplot(3,3,[4,5])
+subplot(3,3,[1,2])
 gg=plot(val.tout,val.h(:,:), val.tout,val.h_ref(:,:));
-legend('altitude','reference');
+legend('state','reference');
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
 
