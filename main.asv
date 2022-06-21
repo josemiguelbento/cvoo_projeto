@@ -292,7 +292,7 @@ StepSize = 0.01;
 
 %h_ref = -10;
 h_pt_ref = -1;
-u_ref = 2;
+u_ref = -2;
 val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
 %plots

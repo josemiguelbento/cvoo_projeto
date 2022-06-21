@@ -207,92 +207,66 @@ val_sae=sim('cvoo_g19_sae','StopTime',num2str(finaltime),'FixedStep',num2str(Ste
 
 plots_sae(val_sae)
 
-%% RP2 - LQR
-%definiçao de novas matrizes do estado trocando theta por velocidade de
-%subida (h_pt)
+%% LQR
+% x = [u; w; q; tt; h; u_i; h_i]
 
-% x = [u; w; q; h_pt]
-% definindo a matriz a para este novo estado
-a_h_pt(1,1) = deriv.xu;
-a_h_pt(1,2) = deriv.xw-g*cos(cond_ini.tt0)/cond_ini.u0;
-a_h_pt(1,3) = -w0;
-a_h_pt(1,4) = -g*cos(cond_ini.tt0)/cond_ini.u0;
-a_h_pt(2,1) = deriv.zu/(1-deriv.zwp);
-a_h_pt(2,2) = deriv.zw/(1-deriv.zwp)-g*sin(cond_ini.tt0)/((1-deriv.zwp)*cond_ini.u0);
-a_h_pt(2,3) = (deriv.zq + cond_ini.u0)/(1-deriv.zwp);
-a_h_pt(2,4) = -g*sin(cond_ini.tt0)/((1-deriv.zwp)*cond_ini.u0);
-a_h_pt(3,1) = deriv.mu+deriv.mwp*deriv.zu/(1-deriv.zwp);
-a_h_pt(3,2) = deriv.mw+deriv.mwp*deriv.zw/(1-deriv.zwp)-g*sin(cond_ini.tt0)*deriv.mwp/((1-deriv.zwp)*cond_ini.u0);
-a_h_pt(3,3) = deriv.mq+deriv.mwp*(cond_ini.u0+deriv.zq)/(1-deriv.zwp);
-a_h_pt(3,4) = -g*sin(cond_ini.tt0)*deriv.mwp/((1-deriv.zwp)*cond_ini.u0);
-a_h_pt(4,1) = -deriv.zu/(1-deriv.zwp);
-a_h_pt(4,2) = -deriv.zu/(1-deriv.zwp)+g*sin(cond_ini.tt0)/((1-deriv.zwp)*cond_ini.u0);
-a_h_pt(4,3) = -(deriv.zq + cond_ini.u0)/(1-deriv.zwp)+cond_ini.u0;
-a_h_pt(4,4) = g*sin(cond_ini.tt0)/((1-deriv.zwp)*cond_ini.u0);
+%definiçao de novas matrizes do estado aumentado com altitude e
+%integradores
+a_h_int = [
+    deriv.xu deriv.xw -w0 -g*cos(cond_ini.tt0) 0 0 0;
+    Zu_til  Zw_til Zq_til Ztt_til 0 0 0;
+    Mu_til Mw_til Mq_til Mtt_til 0 0 0;
+    0 0 1 0 0 0 0;
+    0 -1 0 cond_ini.u0 0 0 0;
+    1 0 0 0 0 0 0;
+    0 0 0 0 1 0 0;
+    ];
 
-b_h_pt = [
+b_h_sf_int = [
     deriv.xde deriv.xdsp;
-    deriv.zde/(1-deriv.zwp) deriv.zdsp/(1-deriv.zwp);
-    deriv.mde+deriv.mwp*deriv.zde/(1-deriv.zwp) deriv.mdsp+deriv.mwp*deriv.zdsp/(1-deriv.zwp);
-    -deriv.zde/(1-deriv.zwp) -deriv.zdsp/(1-deriv.zwp);
-    ];
-
-c_h_pt = eye(size(a_h_pt));
-
-d_h_pt = zeros(size(b_h_pt));
-
-% Aumentar o estado x = [u; w; q; h_pt; u_int; h]
-a_h_pt_int = [
-    a_h_pt zeros(4,2);
-    1 0 0 0 0 0;
-    0 0 0 1 0 0;
-    ];
-
-b_h_pt_int = [
-    b_h_pt;
+    Zde_til Z_dsp_til;
+    Mde_til Mdsp_til;
+    0 0;
+    0 0;
     0 0;
     0 0;
     ];
 
-c_h_pt_int = eye(size(a_h_pt_int));
+c_h_int = eye(size(a_h_int));
 
-d_h_pt_int = zeros(size(b_h_pt_int));
+d_h_sf_int = zeros(size(b_h_sf_int));
+
 % Matrices for LQR control
 % Bryson Method
 % extremos adequados para u w q tt h
 du_max=0.5; %m/s
 dw_max=0.2; %m/s;
 dq_max=5*deg; %deg/s to rad/s
-dh_pt_max=0.5;
-%dh_max=5; %m
+dtt_max=5*deg; %deg to rad
+dh_max=0.5; %m
 
-% extremos usados na matriz R:
-de_max = 5*deg;
-dsp_max = 5*deg;
+% extremos usados na matriz R explícitos no enunciado
 
-Q = diag([1/du_max^2 1/dw_max^2 1/dq_max^2 1/dh_pt_max^2 0.1/du_max^2 0.1/dh_pt_max^2]);
+Q = diag([1/du_max^2 1/dw_max^2 1/dq_max^2 1/dtt_max^2 1/dh_max^2 0.1/du_max^2 0.1/dh_max^2]);
 %R = diag([1/max_deflec.demin^2 1/max_deflec.spmax^2]);
-R = diag([1/de_max^2 1/dsp_max^2]);
+R = diag([1/(5 *deg)^2 1/(5 *deg)^2]);
 
-K_lqr = lqr(a_h_pt_int, b_h_pt_int, Q, R);
-
-%g_h_pt = -c_h_pt*inv(a_h_pt-b_h_pt*K_lqr)*b_h_pt;
-
-%f_h_pt = inv(g_h_pt);
+K_lqr = lqr(a_h_int, b_h_sf_int, Q, R);
 
 fprintf('\n\nDamp com o LQR')
-damp(a_h_pt_int-b_h_pt_int*K_lqr)
+damp(a_h_int-b_h_sf_int*K_lqr)
+%damp(a_h_SAE-b_h_sf*K_lqr) %caracteristica do anel fechado do lqr por cima do SAE
 
 %definição das condicoes iniciais para o simulink
 x0 = [0 0 0 0];
-%x0_h = [0 0 0 0 0];
+x0_h = [0 0 0 0 0];
 finaltime = 100; % tempo de duração da simulação
 StepSize = 0.01;
 
 
 %h_ref = -10;
 h_pt_ref = -1;
-u_ref = 2;
+u_ref = -5;
 val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
 %plots
