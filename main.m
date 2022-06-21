@@ -293,8 +293,25 @@ StepSize = 0.01;
 %h_ref = -10;
 h_pt_ref = -1;
 u_ref = 2;
-val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
+val=sim('cvoo_g19_servomecanismo','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
 %plots
 plots(val)
 
+% %% RP2 - controlo modal
+% % fugoide
+% wn_fug = 0.6;
+% xi_fug = 0.7;
+% % periodo curto
+% wn_pc = 8;
+% xi_pc = 0.8;
+% 
+% % valores proprios
+% val_p = [
+%     -xi_pc*wn_pc + 1i*(wn_pc*sqrt(1-xi_pc^2));
+%     -xi_pc*wn_pc - 1i*(wn_pc*sqrt(1-xi_pc^2));
+%     -xi_fug*wn_fug + 1i*(wn_fug*sqrt(1-xi_fug^2));
+%     -xi_fug*wn_fug - 1i*(wn_fug*sqrt(1-xi_fug^2));
+%     ];
+% % vetores proprios
+% 
