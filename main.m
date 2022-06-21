@@ -267,7 +267,7 @@ dh_pt_max=0.5;
 %dh_max=5; %m
 
 % extremos usados na matriz R:
-de_max = 1*deg;
+de_max = 0.2*deg;
 dsp_max = 5*deg;
 
 Q = diag([1/du_max^2 1/dw_max^2 1/dq_max^2 1/dh_pt_max^2 0.1/du_max^2 0.1/dh_pt_max^2]);
@@ -291,14 +291,19 @@ StepSize = 0.01;
 
 %parametros dos sensores pq isto estava a ficar uma confusao
 
+%atuadores
+vel_max_at = 60; %º/s
+tau = 0.1; %s, cte tempo atuadores
+
 %razao angular q
 f_amost = 40; %Hz
 V_max_sensq = 4.3; %V
 V_min_sensq = 0.7; %V
 q_max_sensq = 300; %º/s
 q_min_sensq = -300; %º/s
-G_sensq = (V_max_sensq-V_min_sensq)/(q_max_sensq-q_min_sensq); %adim
+G_sensq = (V_max_sensq-V_min_sensq)/(q_max_sensq-q_min_sensq); %V/(º/s)
 rms_sensq = 4.4; %º/s
+Offset_sensq = 2.5;
 
 %conversor A/D
 conv_max = 5; %V
@@ -306,6 +311,18 @@ conv_min = 0; %V
 conv_bit = 12;
 conv_res = (conv_max - conv_min)/(2*(2^conv_bit)-1);
 conv_rms = 1.5*conv_res;
+fat_quant = (conv_max-conv_min)/2^12; 
+
+%sensor p_din
+p_din_tau = 0.01; %s
+pdin_max = 2e3; %Pa
+pdin_min = -2e3; %Pa
+v_pdin_max = 5; %V
+v_pdin_min = 0; %V
+rho0 = 1.225; %constante, baixa altitude, kg/m^3
+Gp_din = (v_pdin_max-v_pdin_min)/(pdin_max-pdin_min);
+offset_pdin = 2.5;
+
 
 %h_ref = -10;
 h_pt_ref = -1;
