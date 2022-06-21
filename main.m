@@ -95,7 +95,7 @@ damp(a_h)
 %formulação do modelo da aeronave e representar graficamente os seus polos
 %e zeros
 sys = ss(a_h,b_h,c_h,d_h);
-pzmap(sys)
+%pzmap(sys)
 
 %agora vamos estudar o comportamento dos modos longitudinais
 [wn,zeta,p]=damp(a_h);
@@ -152,9 +152,9 @@ k_ob = rank(Ob);
 % melhor traduz este modo) para a entrada do spoiler. (u para dsp)
 num_dsp_u = num_dsp(1,:); %1- estamos a avaliar a estabilização do estado velocidade ar com spoiler
 sys_usp = tf(num_dsp_u,den_dsp);
-figure()
-rlocus(-sys_usp) %realimentação positiva - já fica estável tanto para fugoide e PC
-sgrid
+%figure()
+%rlocus(-sys_usp) %realimentação positiva - já fica estável tanto para fugoide e PC
+%sgrid
 
 %escolhemos um K tal q os polos do fugoide apresentem pelo menos damping de
 %0.6
@@ -170,9 +170,9 @@ a_h_cl_fug = a_h-b_h_sf*k_siso';
 [num_dsp_2o,den_dsp_2o]=ss2tf(a_h_cl_fug,b_h,c_h,d_h,3); %dsp (spoiler)
 num_dsp_w = num_dsp_2o(2,:); %2- estamos a avaliar a estabilização do estado velocidade subida com elevator
 sys_wsp = tf(num_dsp_w,den_dsp_2o);
-figure()
-rlocus(sys_wsp)
-sgrid
+% figure()
+% rlocus(sys_wsp)
+% sgrid
 
 k_w_dsp = 4.1;
 k_siso2 = [0 -k_u_dsp;0 k_w_dsp; 0 0; 0 0; 0 0];
@@ -267,8 +267,8 @@ dh_pt_max=0.5;
 %dh_max=5; %m
 
 % extremos usados na matriz R:
-de_max = 5*deg;
-dsp_max = 5*deg;
+de_max = 20*deg;
+dsp_max = 60*deg;
 
 Q = diag([1/du_max^2 1/dw_max^2 1/dq_max^2 1/dh_pt_max^2 0.1/du_max^2 0.1/dh_pt_max^2]);
 %R = diag([1/max_deflec.demin^2 1/max_deflec.spmax^2]);
@@ -293,7 +293,9 @@ StepSize = 0.01;
 %h_ref = -10;
 h_pt_ref = -1;
 u_ref = 2;
-val=sim('cvoo_g19_servomecanismo','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
+%val=sim('cvoo_g19_servomecanismo','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
+val=sim('cvoo_g19_servomecanismo_atuador','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
+%val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
 %plots
 plots(val)
