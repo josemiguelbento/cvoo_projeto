@@ -13,7 +13,7 @@ gg=ylabel('velocidade ar (m/s)');
 
 
 subplot(3,3,3)
-gg=plot(val.tout,180/pi*val.de(:,:));
+gg=plot(val.de.time,180/pi*val.de.signals.values(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
 
@@ -30,7 +30,7 @@ gg=ylabel('velocidade subida (m/s)');
 
 
 subplot(3,3,6)
-gg=plot(val.tout,180/pi*val.dsp(:,:));
+gg=plot(val.dsp.time,180/pi*val.dsp.signals.values(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
 

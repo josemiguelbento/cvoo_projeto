@@ -267,8 +267,8 @@ dh_pt_max=0.5;
 %dh_max=5; %m
 
 % extremos usados na matriz R:
-de_max = 20*deg;
-dsp_max = 60*deg;
+de_max = 1*deg;
+dsp_max = 5*deg;
 
 Q = diag([1/du_max^2 1/dw_max^2 1/dq_max^2 1/dh_pt_max^2 0.1/du_max^2 0.1/dh_pt_max^2]);
 %R = diag([1/max_deflec.demin^2 1/max_deflec.spmax^2]);
@@ -289,6 +289,23 @@ x0 = [0 0 0 0];
 finaltime = 100; % tempo de duração da simulação
 StepSize = 0.01;
 
+%parametros dos sensores pq isto estava a ficar uma confusao
+
+%razao angular q
+f_amost = 40; %Hz
+V_max_sensq = 4.3; %V
+V_min_sensq = 0.7; %V
+q_max_sensq = 300; %º/s
+q_min_sensq = -300; %º/s
+G_sensq = (V_max_sensq-V_min_sensq)/(q_max_sensq-q_min_sensq); %adim
+rms_sensq = 4.4; %º/s
+
+%conversor A/D
+conv_max = 5; %V
+conv_min = 0; %V
+conv_bit = 12;
+conv_res = (conv_max - conv_min)/(2*(2^conv_bit)-1);
+conv_rms = 1.5*conv_res;
 
 %h_ref = -10;
 h_pt_ref = -1;
