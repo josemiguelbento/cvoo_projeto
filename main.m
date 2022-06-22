@@ -325,8 +325,14 @@ offset_pdin = 2.5;
 
 
 %h_ref = -10;
+h_solo = cond_ini.h0;
 h_pt_ref = -1;
 u_ref = 2;
+u0 =6;
+dist_aux = 40*u0:10*u0:60*u0;
+ref_aux = 0:2.5*u0:5*u0;
+p = polyfit(dist_aux,ref_aux,2);
+altitude_solo = 5*u0;
 %val=sim('cvoo_g19_servomecanismo','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 val=sim('cvoo_g19_servomecanismo_atuador','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 %val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
