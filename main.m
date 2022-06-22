@@ -323,6 +323,15 @@ rho0 = 1.225; %constante, baixa altitude, kg/m^3
 Gp_din = (v_pdin_max-v_pdin_min)/(pdin_max-pdin_min);
 offset_pdin = 2.5;
 
+%radio altimetro
+ft = 0.3048; %ft to m
+h_ra_max = 1500*ft;
+h_ra_min = 0;
+G_ra = 10e-3/ft; %Vdc/ft
+ra_rms = 0.015*cond_ini.h0; %ruido relativo, assumir h \aprox cte
+Offset_ra = 0;
+fat_conv_ra = 1/3;
+%[ra_rms^2/f_amost]
 
 %h_ref = -10;
 h_solo = cond_ini.h0;
