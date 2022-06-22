@@ -374,7 +374,7 @@ L=lqe(a_h_pt_h,ge,c_h_pt_h,qe,re);
 x0_e = [0 0 0 0 0];
 
 %val=sim('cvoo_g19_servomecanismo','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
-val=sim('cvoo_g19_at_sens_est','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
+val=sim('cvoo_g19_at_sens_est2','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 %val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
 %plots
