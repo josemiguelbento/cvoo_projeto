@@ -352,13 +352,15 @@ c_h_pt_h = [
     0 0 0 0 1
     ];
 
+%c_h_pt_h = eye(size(a_h_pt_h));
 d_h_pt_h = zeros(3,2);
+%d_h_pt_h = zeros(size(b_h_pt_h));
 
 ge=eye(size(a_h_pt_h));
 qe=diag([1 1 1 1 1]);
 re=diag([1 1 1]);
 L=lqe(a_h_pt_h,ge,c_h_pt_h,qe,re);
-[ae,be,ce,de]=estim(a_h_pt_h,b_h_pt_h,c_h_pt_h,d_h_pt_h,L);
+[ae,be,ce,de]=estim(a_h_pt_h,b_h_pt_h,c_h_pt_h,d_h_pt_h,L,[1, 2, 3],[1, 2]);
 
 x0_e = [0 0 0 0 0];
 
