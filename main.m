@@ -296,7 +296,7 @@ vel_max_at = 60; %º/s
 tau = 0.1; %s, cte tempo atuadores
 
 %razao angular q
-f_amost = 40; %Hz
+f_amost = 100; %Hz
 V_max_sensq = 4.3; %V
 V_min_sensq = 0.7; %V
 q_max_sensq = 300; %º/s
@@ -334,7 +334,7 @@ ref_aux = 0:2.5*u0:5*u0;
 p = polyfit(dist_aux,ref_aux,2);
 altitude_solo = 5*u0;
 %val=sim('cvoo_g19_servomecanismo','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
-val=sim('cvoo_g19_servomecanismo_atuador','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
+val=sim('cvoo_g19_sensores','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 %val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
 %plots
