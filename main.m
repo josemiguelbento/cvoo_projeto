@@ -333,8 +333,37 @@ dist_aux = 40*u0:10*u0:60*u0;
 ref_aux = 0:2.5*u0:5*u0;
 p = polyfit(dist_aux,ref_aux,2);
 altitude_solo = 5*u0;
+
+
+%% Estimador - vamos usar as matrizes do estado aumentado com h
+a_h_pt_h = [
+    a_h_pt zeros(4,1);
+    0 0 0 1 0 ;
+    ];
+
+b_h_pt_h = [
+    b_h_pt;
+    0 0;
+    ];
+
+c_h_pt_h = [
+    1 0 0 0 0
+    0 0 1 0 0
+    0 0 0 0 1
+    ];
+
+d_h_pt_h = zeros(3,2);
+
+ge=eye(size(a_h_pt_h));
+qe=diag([1 1 1 1 1]);
+re=diag([1 1 1]);
+L=lqe(a_h_pt_h,ge,c_h_pt_h,qe,re);
+[ae,be,ce,de]=estim(a_h_pt_h,b_h_pt_h,c_h_pt_h,d_h_pt_h,L);
+
+x0_e = [0 0 0 0 0];
+
 %val=sim('cvoo_g19_servomecanismo','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
-val=sim('cvoo_g19_sensores','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
+val=sim('cvoo_g19_servomecanismo_atuador2','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 %val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
 %plots
