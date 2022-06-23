@@ -4,7 +4,7 @@ function [cond_ini, max_deflec, inert, wing, deriv] = def_model()
     kn = 0.514444444; %1 kn = 0.514444444 m/s
     
     %Initial flight condition
-    cond_ini.h0 =50;
+    cond_ini.h0 =110; %altura inicial em relaçao ao solo
     cond_ini.aa0 =3.84 *deg ;
     cond_ini.gg0 =0 *deg ;
     cond_ini.tt0 = cond_ini.aa0 + cond_ini.gg0;

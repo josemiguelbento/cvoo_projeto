@@ -1,4 +1,4 @@
-function []=plots(val)
+function []=plots(val, cond_ini)
 %plots
 f=figure();
 f.Position = [50 100 1500 450];
@@ -62,7 +62,7 @@ gg=ylabel('razão picada (rad/s)');
 
 
 subplot(3,3,9)
-gg=plot(val.tout,val.h(:,:),val.tout,val.h_e(:,:));
+gg=plot(val.tout,5*cond_ini.u0+val.h(:,:),val.tout,5*cond_ini.u0+val.h_e(:,:),val.tout,val.h_solo(:,:)+val.h_ref(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
 
