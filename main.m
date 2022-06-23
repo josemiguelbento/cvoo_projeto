@@ -367,7 +367,8 @@ d_h_pt_h = zeros(3,2);
 
 ge=eye(size(a_h_pt_h));
 qe=diag([1 1 1 1 1]);
-re=diag([1 1 1]);
+%re=100000*diag([1 1 1]);
+re=1000*diag([1 1 1]);
 L=lqe(a_h_pt_h,ge,c_h_pt_h,qe,re);
 [ae,be,ce,de]=estim(a_h_pt_h,b_h_pt_h,c_h_pt_h,d_h_pt_h,L,[1, 2, 3],[1, 2]);
 
