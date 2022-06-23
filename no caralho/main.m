@@ -381,7 +381,7 @@ val=sim('cvoo_g19_at_sens_est_bom','StopTime',num2str(finaltime),'FixedStep',num
 
 %plots
 plots(val)
-g
+
 % %% RP2 - controlo modal
 % % fugoide
 % wn_fug = 0.6;
