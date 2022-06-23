@@ -1,13 +1,12 @@
 Model {
   Name			  "cvoo_g19_at_sens_est2"
-  Version		  10.3
-  SavedCharacterEncoding  "UTF-8"
-  ModelUUID		  "79e6de32-e519-49f9-9eaa-0a554dbc5f37"
+  Version		  10.1
+  SavedCharacterEncoding  "windows-1252"
   GraphicalInterface {
     NumRootInports	    0
     NumRootOutports	    0
     ParameterArgumentNames  ""
-    ComputedModelVersion    "3.5"
+    ComputedModelVersion    "1.2"
     NumModelReferences	    0
     NumTestPointedSignals   9
     TestPointedSignal {
@@ -80,50 +79,54 @@ Model {
     HasTerminateEvent	    0
     PreCompExecutionDomainType "Unset"
     IsExportFunctionModel   0
-    SimulinkSubDomainType   "Simulink"
+    IsArchitectureModel	    0
+    IsAUTOSARArchitectureModel 0
     NumParameterArguments   0
     NumExternalFileReferences 5
     ExternalFileReference {
       Reference		      "simulink/Sources/Band-Limited\nWhite Noise"
-      Path		      "cvoo_g19_at_sens_est2/Sensores/din_pdin_vel_ar/Conversor A//D/ruÃ­do a 1.5 LSB rms"
+      Path		      "cvoo_g19_at_sens_est2/Sensores/din_pdin_vel_ar/Conversor A//D/ruído a 1.5 LSB rms"
       SID		      "197"
       Type		      "LIBRARY_BLOCK"
     }
     ExternalFileReference {
       Reference		      "simulink/Sources/Band-Limited\nWhite Noise"
-      Path		      "cvoo_g19_at_sens_est2/Sensores/din_radio_altimeter/Conversor A//D/ruÃ­do a 1.5 LSB rms"
+      Path		      "cvoo_g19_at_sens_est2/Sensores/din_radio_altimeter/Conversor A//D/ruído a 1.5 LSB rms"
       SID		      "283"
       Type		      "LIBRARY_BLOCK"
     }
     ExternalFileReference {
       Reference		      "simulink/Sources/Band-Limited\nWhite Noise"
-      Path		      "cvoo_g19_at_sens_est2/Sensores/din_radio_altimeter/DinÃ¢mica do radio altimetro/ruido radio altimet"
-      "ro"
+      Path		      "cvoo_g19_at_sens_est2/Sensores/din_radio_altimeter/Dinâmica do sensor de razão de picada/ruido radi"
+      "o altimetro"
       SID		      "293"
       Type		      "LIBRARY_BLOCK"
     }
     ExternalFileReference {
       Reference		      "simulink/Sources/Band-Limited\nWhite Noise"
-      Path		      "cvoo_g19_at_sens_est2/Sensores/din_razao_angular/Conversor A//D/ruÃ­do a 1.5 LSB rms"
+      Path		      "cvoo_g19_at_sens_est2/Sensores/din_razao_angular/Conversor A//D/ruído a 1.5 LSB rms"
       SID		      "136"
       Type		      "LIBRARY_BLOCK"
     }
     ExternalFileReference {
       Reference		      "simulink/Sources/Band-Limited\nWhite Noise"
-      Path		      "cvoo_g19_at_sens_est2/Sensores/din_razao_angular/DinÃ¢mica do sensor de razÃ£o de picada/ruÃ­do sen"
-      "sor razao picada"
+      Path		      "cvoo_g19_at_sens_est2/Sensores/din_razao_angular/Dinâmica do sensor de razão de picada/ruído sensor"
+      " razao picada"
       SID		      "127"
       Type		      "LIBRARY_BLOCK"
     }
     OrderedModelArguments   1
   }
-  LogicAnalyzerPlugin	  "on"
-  SLCCPlugin		  "on"
   DiagnosticSuppressor	  "on"
-  AnimationPlugin	  "on"
-  slcheck_filter_plugin	  "on"
-  NotesPlugin		  "on"
+  LogicAnalyzerPlugin	  "on"
+  LogicAnalyzerSignalOrdering "c8d20bde-b318-424a-8da8-9dbc294600fc,5923e71e-3f06-4d9d-b10f-6b42ee9055e4,6bc89679-3dbc"
+  "-462d-abe9-139a38f4eda8,2026faff-8404-49db-8ea3-02ab02457bbc,0eafe460-b10c-4cb5-80f1-473bc8766b39,f80b4674-f17d-4123"
+  "-9c97-355a6f7f51ee,05ecba4f-0062-40d5-ab51-f5895ea9342b,9707bd9a-90b8-4574-9c31-94d45a0b35a9,435dd2f2-9288-4d91-8433"
+  "-a6b744b4a5d5"
   WebScopes_FoundationPlugin "on"
+  NotesPlugin		  "on"
+  SLCCPlugin		  "on"
+  AnimationPlugin	  "on"
   EnableAccessToBaseWorkspace on
   ScopeRefreshTime	  0.035000
   OverrideScopeRefreshTime on
@@ -134,7 +137,7 @@ Model {
   MinMaxOverflowArchiveMode "Overwrite"
   FPTRunName		  "Run 1"
   MaxMDLFileLineLength	  120
-  LastSavedArchitecture	  "maci64"
+  LastSavedArchitecture	  "win64"
   Object {
     $PropName		    "BdWindowsInfo"
     $ObjectID		    1
@@ -144,7 +147,7 @@ Model {
       $ObjectID		      2
       $ClassName	      "Simulink.WindowInfo"
       IsActive		      [1]
-      Location		      [0.0, 25.0, 1440.0, 809.0]
+      Location		      [0.0, 25.0, 1554.0, 882.0]
       Object {
 	$PropName		"ModelBrowserInfo"
 	$ObjectID		3
@@ -160,7 +163,7 @@ Model {
 	$PropName		"ExplorerBarInfo"
 	$ObjectID		4
 	$ClassName		"Simulink.ExplorerBarInfo"
-	Visible			[0]
+	Visible			[1]
       }
       Array {
 	Type			"Simulink.EditorInfo"
@@ -171,68 +174,46 @@ Model {
 	  IsTabbed		  [1]
 	  ViewObjType		  "SimulinkTopLevel"
 	  LoadSaveID		  "0"
-	  Extents		  [1326.0, 604.0]
-	  ZoomFactor		  [0.76565394804867937]
-	  Offset		  [-857.15952892608311, -95.934066159610779]
-	  SceneRectInView	  [-857.15952892608311, -95.934066159610779, 1731.8528865153771, 788.86813231922156]
+	  Extents		  [1811.0, 809.0]
+	  ZoomFactor		  [1.0]
+	  Offset		  [-1082.0061646611839, 4.8843461916484454]
+	  SceneRectInView	  [-1082.0061646611839, 4.8843461916484454, 1448.8, 647.2]
 	}
 	Object {
 	  $ObjectID		  6
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "340"
-	  Extents		  [1326.0, 604.0]
-	  ZoomFactor		  [2.2325581395348837]
-	  Offset		  [-25.6484375, 224.72916666666666]
-	  SceneRectInView	  [-25.6484375, 224.72916666666666, 593.9375, 270.54166666666669]
+	  LoadSaveID		  "330"
+	  Extents		  [1811.0, 809.0]
+	  ZoomFactor		  [1.25]
+	  Offset		  [-398.29131689266666, 221.4184921558471]
+	  SceneRectInView	  [-398.29131689266666, 221.4184921558471, 1159.04, 517.76]
 	}
 	Object {
 	  $ObjectID		  7
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "347"
-	  Extents		  [1326.0, 604.0]
-	  ZoomFactor		  [1.0]
-	  Offset		  [-409.34375, -112.0]
-	  SceneRectInView	  [-409.34375, -112.0, 1326.0, 604.0]
+	  LoadSaveID		  "340"
+	  Extents		  [1811.0, 809.0]
+	  ZoomFactor		  [1.25]
+	  Offset		  [-288.23968749999995, -1.5600000000000023]
+	  SceneRectInView	  [-288.23968749999995, -1.5600000000000023, 1159.04, 517.76]
 	}
 	Object {
 	  $ObjectID		  8
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "330"
-	  Extents		  [1326.0, 604.0]
-	  ZoomFactor		  [1.1440502484815021]
-	  Offset		  [-398.29131689266666, 216.32407284966314]
-	  SceneRectInView	  [-398.29131689266666, 216.32407284966314, 1159.04, 527.94883861236792]
+	  LoadSaveID		  "347"
+	  Extents		  [1811.0, 809.0]
+	  ZoomFactor		  [1.0]
+	  Offset		  [-76.30859375, -138.7]
+	  SceneRectInView	  [-76.30859375, -138.7, 1448.8, 647.2]
 	}
 	Object {
 	  $ObjectID		  9
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "273"
-	  Extents		  [1326.0, 604.0]
-	  ZoomFactor		  [1.4314782354659656]
-	  Offset		  [-293.91259094480546, -83.04391371340526]
-	  SceneRectInView	  [-293.91259094480546, -83.04391371340526, 926.31516648129059, 421.94144838212634]
-	}
-	Object {
-	  $ObjectID		  10
-	  IsActive		  [0]
-	  IsTabbed		  [0]
-	  ViewObjType		  "SimulinkSubsys"
-	  LoadSaveID		  "287"
-	  Extents		  [1326.0, 604.0]
-	  ZoomFactor		  [1.2863453111305869]
-	  Offset		  [-217.62563704248771, -185.76543209876547]
-	  SceneRectInView	  [-217.62563704248771, -185.76543209876547, 1030.8274057722183, 469.54732510288073]
-	}
-	Object {
-	  $ObjectID		  11
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -243,7 +224,7 @@ Model {
 	  SceneRectInView	  [-187.52051017642719, 146.5194898235726, 1159.04, 517.76]
 	}
 	Object {
-	  $ObjectID		  12
+	  $ObjectID		  10
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -254,7 +235,7 @@ Model {
 	  SceneRectInView	  [12.429936920839225, -75.648638922326626, 550.14012615832155, 277.70945041784279]
 	}
 	Object {
-	  $ObjectID		  13
+	  $ObjectID		  11
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -265,7 +246,7 @@ Model {
 	  SceneRectInView	  [-242.41083099906632, -153.92328139710898, 889.82166199813264, 449.17989612755133]
 	}
 	Object {
-	  $ObjectID		  14
+	  $ObjectID		  12
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -276,7 +257,7 @@ Model {
 	  SceneRectInView	  [13.5501398269312, -30.788158901435203, 365.9465953461376, 184.72898638666103]
 	}
 	Object {
-	  $ObjectID		  15
+	  $ObjectID		  13
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -287,7 +268,7 @@ Model {
 	  SceneRectInView	  [-391.02855859336228, 64.952945016015633, 1279.6977421867246, 645.988430557337]
 	}
 	Object {
-	  $ObjectID		  16
+	  $ObjectID		  14
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -298,7 +279,18 @@ Model {
 	  SceneRectInView	  [-191.19632167196627, -41.964749976876789, 802.77631052420975, 405.23960606353512]
 	}
 	Object {
-	  $ObjectID		  17
+	  $ObjectID		  15
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "273"
+	  Extents		  [2446.0, 1141.0]
+	  ZoomFactor		  [2.7041666666666666]
+	  Offset		  [-283.02003081664094, -83.04391371340526]
+	  SceneRectInView	  [-283.02003081664094, -83.04391371340526, 904.53004622496155, 421.94144838212634]
+	}
+	Object {
+	  $ObjectID		  16
 	  IsActive		  [0]
 	  IsTabbed		  [0]
 	  ViewObjType		  "SimulinkSubsys"
@@ -307,6 +299,17 @@ Model {
 	  ZoomFactor		  [1.5]
 	  Offset		  [-588.66666666666663, -368.5]
 	  SceneRectInView	  [-588.66666666666663, -368.5, 1630.6666666666667, 760.66666666666663]
+	}
+	Object {
+	  $ObjectID		  17
+	  IsActive		  [0]
+	  IsTabbed		  [0]
+	  ViewObjType		  "SimulinkSubsys"
+	  LoadSaveID		  "287"
+	  Extents		  [2446.0, 1141.0]
+	  ZoomFactor		  [2.4299999999999997]
+	  Offset		  [-205.50411522633749, -185.76543209876547]
+	  SceneRectInView	  [-205.50411522633749, -185.76543209876547, 1006.5843621399179, 469.54732510288073]
 	}
 	Object {
 	  $ObjectID		  18
@@ -354,43 +357,27 @@ Model {
 	}
 	PropName		"EditorsInfo"
       }
-      Array {
-	Type			"Simulink.DockComponentInfo"
-	Dimension		2
-	Object {
-	  $ObjectID		  22
-	  Type			  "GLUE2:PropertyInspector"
-	  ID			  "Property Inspector"
-	  Visible		  [1]
-	  CreateCallback	  ""
-	  UserData		  ""
-	  Floating		  [0]
-	  DockPosition		  "Right"
-	  Width			  [640]
-	  Height		  [480]
-	  Minimized		  "On"
-	}
-	Object {
-	  $ObjectID		  23
-	  Type			  "Simulink:Editor:ReferencedFiles"
-	  ID			  "Referenced Files"
-	  Visible		  [0]
-	  CreateCallback	  ""
-	  UserData		  "{\"filterShowRefModels\":\"true\",\"filterShowRefSubs\":\"true\",\"filterShowOnlyDirtyFiles\":\"false\"}\n"
-	  Floating		  [0]
-	  DockPosition		  "Left"
-	  Width			  [640]
-	  Height		  [480]
-	  Minimized		  "Unset"
-	}
-	PropName		"DockComponentsInfo"
+      Object {
+	$PropName		"DockComponentsInfo"
+	$ObjectID		22
+	$ClassName		"Simulink.DockComponentInfo"
+	Type			"GLUE2:PropertyInspector"
+	ID			"Property Inspector"
+	Visible			[1]
+	CreateCallback		""
+	UserData		""
+	Floating		[0]
+	DockPosition		"Right"
+	Width			[512]
+	Height			[384]
+	Minimized		"On"
       }
       WindowState	      "AAAA/wAAAAD9AAAAAgAAAAAAAAC9AAAB+PwCAAAABPsAAAAWAEQAbwBjAGsAVwBpAGQAZwBlAHQAMwEAAAAxAAAB+AAAA"
       "AAAAAAA+wAAABYARABvAGMAawBXAGkAZABnAGUAdAA0AAAAAAD/////AAAAAAAAAAD7AAAAUgBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0Ac"
-      "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAABrAP////sAAABgAFMAaQBtAHUAb"
+      "ABvAG4AZQBuAHQALwBHAEwAVQBFADIAIAB0AHIAZQBlACAAYwBvAG0AcABvAG4AZQBuAHQAAAAAAP////8AAAB5AP////sAAABgAFMAaQBtAHUAb"
       "ABpAG4AawA6AEUAZABpAHQAbwByADoAUgBlAGYAZQByAGUAbgBjAGUAZABGAGkAbABlAHMALwBSAGUAZgBlAHIAZQBuAGMAZQBkACAARgBpAGwAZ"
-      "QBzAAAAAAD/////AAAAjwD///8AAAABAAAAAAAAAAD8AgAAAAH7AAAAVABHAEwAVQBFADIAOgBQAHIAbwBwAGUAcgB0AHkASQBuAHMAcABlAGMAd"
-      "ABvAHIALwBQAHIAbwBwAGUAcgB0AHkAIABJAG4AcwBwAGUAYwB0AG8AcgAAAAAA/////wAAAawA////AAAFVAAAAnsAAAABAAAAAgAAAAEAAAAC/"
+      "QBzAAAAAAD/////AAAAAAAAAAAAAAABAAAAAAAAAAD8AgAAAAH7AAAAVABHAEwAVQBFADIAOgBQAHIAbwBwAGUAcgB0AHkASQBuAHMAcABlAGMAd"
+      "ABvAHIALwBQAHIAbwBwAGUAcgB0AHkAIABJAG4AcwBwAGUAYwB0AG8AcgAAAAAA/////wAAAhYA////AAAHQAAAA28AAAABAAAAAgAAAAEAAAAC/"
       "AAAAAMAAAAAAAAAAQAAADYAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAEwAZQBmAHQDAAAAAP////8AAAAAA"
       "AAAAAAAAAEAAAABAAAAOABjAG8AbABsAGEAcABzAGkAYgBsAGUAUABhAG4AZQBsAFQAbwBvAGwAQgBhAHIAUgBpAGcAaAB0AwAAAAD/////AAAAA"
       "AAAAAAAAAADAAAAAQAAADoAYwBvAGwAbABhAHAAcwBpAGIAbABlAFAAYQBuAGUAbABUAG8AbwBsAEIAYQByAEIAbwB0AHQAbwBtAAAAAAD/////A"
@@ -405,16 +392,15 @@ Model {
     BDUuid		    "72ce8a4a-96c8-41f1-b9fe-237606140352"
   }
   HideAutomaticNames	  on
-  SequenceViewerTimePrecision 3
-  SequenceViewerHistory	  1000
   Created		  "Sun Jun 05 17:10:24 2022"
   Creator		  "josem"
+  UpdateHistory		  "UpdateHistoryNever"
   ModifiedByFormat	  "%<Auto>"
-  LastModifiedBy	  "thomasmchilds"
+  LastModifiedBy	  "josem"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Thu Jun 23 14:49:23 2022"
-  RTWModifiedTimeStamp	  577896510
-  ModelVersionFormat	  "%<AutoIncrement:3.5>"
+  LastModifiedDate	  "Thu Jun 23 12:46:48 2022"
+  RTWModifiedTimeStamp	  577889162
+  ModelVersionFormat	  "1.%<AutoIncrement:2>"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
   LibraryLinkDisplay	  "disabled"
@@ -434,6 +420,7 @@ Model {
   ShowTestPointIcons	  on
   ShowSignalResolutionIcons on
   ShowViewerIcons	  on
+  SortedOrder		  off
   VariantCondition	  off
   ShowLinearizationAnnotations on
   ShowVisualizeInsertedRTB on
@@ -446,9 +433,8 @@ Model {
   StatusBar		  on
   BrowserShowLibraryLinks off
   FunctionConnectors	  off
-  ScheduleConnectors	  off
   BrowserLookUnderMasks	  off
-  MultithreadedSim	  "on"
+  MultiThreadCoSim	  "on"
   SimulationMode	  "normal"
   SILPILModeSetting	  "automated"
   SILPILSystemUnderTest	  "topmodel"
@@ -472,7 +458,7 @@ Model {
   TryForcingSFcnDF	  off
   Object {
     $PropName		    "DataLoggingOverride"
-    $ObjectID		    24
+    $ObjectID		    23
     $ClassName		    "Simulink.SimulationData.ModelLoggingInfo"
     model_		    "cvoo_g19_at_sens_est2"
     overrideMode_	    [0.0]
@@ -491,7 +477,7 @@ Model {
   }
   Object {
     $PropName		    "InstrumentedSignals"
-    $ObjectID		    25
+    $ObjectID		    24
     $ClassName		    "Simulink.HMI.InstrumentedSignals"
     Array {
       Type		      "Struct"
@@ -509,7 +495,6 @@ Model {
 	MaxPoints_		[1024.0]
 	TargetBufferedStreaming_ [0.0]
 	IsFrameBased_		[0.0]
-	HideInSDI_		[0.0]
 	DomainType_		""
 	Array {
 	  Type			  "Struct"
@@ -533,7 +518,6 @@ Model {
 	MaxPoints_		[0.0]
 	TargetBufferedStreaming_ [0.0]
 	IsFrameBased_		[0.0]
-	HideInSDI_		[0.0]
 	DomainType_		""
 	Array {
 	  Type			  "Struct"
@@ -557,7 +541,6 @@ Model {
 	MaxPoints_		[0.0]
 	TargetBufferedStreaming_ [0.0]
 	IsFrameBased_		[0.0]
-	HideInSDI_		[0.0]
 	DomainType_		""
 	Array {
 	  Type			  "Struct"
@@ -581,7 +564,6 @@ Model {
 	MaxPoints_		[0.0]
 	TargetBufferedStreaming_ [0.0]
 	IsFrameBased_		[0.0]
-	HideInSDI_		[0.0]
 	DomainType_		""
 	Array {
 	  Type			  "Struct"
@@ -605,7 +587,6 @@ Model {
 	MaxPoints_		[0.0]
 	TargetBufferedStreaming_ [0.0]
 	IsFrameBased_		[0.0]
-	HideInSDI_		[0.0]
 	DomainType_		""
 	Array {
 	  Type			  "Struct"
@@ -629,7 +610,6 @@ Model {
 	MaxPoints_		[1024.0]
 	TargetBufferedStreaming_ [0.0]
 	IsFrameBased_		[0.0]
-	HideInSDI_		[0.0]
 	DomainType_		""
 	Array {
 	  Type			  "Struct"
@@ -653,7 +633,6 @@ Model {
 	MaxPoints_		[0.0]
 	TargetBufferedStreaming_ [0.0]
 	IsFrameBased_		[0.0]
-	HideInSDI_		[0.0]
 	DomainType_		""
 	Array {
 	  Type			  "Struct"
@@ -677,7 +656,6 @@ Model {
 	MaxPoints_		[0.0]
 	TargetBufferedStreaming_ [0.0]
 	IsFrameBased_		[0.0]
-	HideInSDI_		[0.0]
 	DomainType_		""
 	Array {
 	  Type			  "Struct"
@@ -701,7 +679,6 @@ Model {
 	MaxPoints_		[1024.0]
 	TargetBufferedStreaming_ [0.0]
 	IsFrameBased_		[0.0]
-	HideInSDI_		[0.0]
 	DomainType_		""
 	Array {
 	  Type			  "Struct"
@@ -721,7 +698,6 @@ Model {
   ExtModeTrigMode	  "normal"
   ExtModeTrigPort	  "1"
   ExtModeTrigElement	  "any"
-  ExtModeTrigSignalOutputPortIndex 0
   ExtModeTrigDuration	  1000
   ExtModeTrigDurationFloating "auto"
   ExtModeTrigHoldOff	  0
@@ -737,7 +713,6 @@ Model {
   ExtModeSkipDownloadWhenConnect off
   ExtModeLogAll		  on
   ExtModeAutoUpdateStatusClock on
-  VariantFading		  on
   ShowModelReferenceBlockVersion off
   ShowModelReferenceBlockIO off
   OrderedModelArguments	  on
@@ -745,16 +720,16 @@ Model {
     Type		    "Handle"
     Dimension		    1
     Simulink.ConfigSet {
-      $ObjectID		      26
-      Version		      "21.0.0"
+      $ObjectID		      25
+      Version		      "20.0.1"
       DisabledProps	      []
       Description	      ""
       Array {
 	Type			"Handle"
 	Dimension		9
 	Simulink.SolverCC {
-	  $ObjectID		  27
-	  Version		  "21.0.0"
+	  $ObjectID		  26
+	  Version		  "20.0.1"
 	  DisabledProps		  []
 	  Description		  ""
 	  Components		  []
@@ -776,9 +751,9 @@ Model {
 	  RelTol		  "1e-3"
 	  EnableMultiTasking	  off
 	  ConcurrentTasks	  off
+	  Solver		  "VariableStepAuto"
 	  SolverName		  "VariableStepAuto"
 	  SolverJacobianMethodControl "auto"
-	  DaesscMode		  "auto"
 	  ShapePreserveControl	  "DisableAll"
 	  ZeroCrossControl	  "UseLocalSettings"
 	  ZeroCrossAlgorithm	  "Nonadaptive"
@@ -796,8 +771,8 @@ Model {
 	  ODENIntegrationMethod	  "ode3"
 	}
 	Simulink.DataIOCC {
-	  $ObjectID		  28
-	  Version		  "21.0.0"
+	  $ObjectID		  27
+	  Version		  "20.0.1"
 	  DisabledProps		  []
 	  Description		  ""
 	  Components		  []
@@ -838,8 +813,8 @@ Model {
 	  LoggingIntervals	  "[-inf, inf]"
 	}
 	Simulink.OptimizationCC {
-	  $ObjectID		  29
-	  Version		  "21.0.0"
+	  $ObjectID		  28
+	  Version		  "20.0.1"
 	  Array {
 	    Type		    "Cell"
 	    Dimension		    9
@@ -863,7 +838,6 @@ Model {
 	  UseDivisionForNetSlopeComputation "off"
 	  GainParamInheritBuiltInType off
 	  UseFloatMulNetSlope	  off
-	  InheritOutputTypeSmallerThanSingle off
 	  DefaultUnderspecifiedDataType	"double"
 	  UseSpecifiedMinMax	  off
 	  InlineInvariantSignals  off
@@ -913,8 +887,8 @@ Model {
 	  EfficientTunableParamExpr off
 	}
 	Simulink.DebuggingCC {
-	  $ObjectID		  30
-	  Version		  "21.0.0"
+	  $ObjectID		  29
+	  Version		  "20.0.1"
 	  Array {
 	    Type		    "Cell"
 	    Dimension		    1
@@ -940,6 +914,7 @@ Model {
 	  UnderspecifiedInitializationDetection	"Simplified"
 	  MergeDetectMultiDrivingBlocksExec "error"
 	  CheckExecutionContextPreStartOutputMsg off
+	  CheckExecutionContextRuntimeOutputMsg	off
 	  SignalResolutionControl "UseLocalSettings"
 	  BlockPriorityViolationMsg "warning"
 	  MinStepSizeMsg	  "warning"
@@ -990,7 +965,6 @@ Model {
 	  ModelReferenceIOMismatchMessage "none"
 	  UnknownTsInhSupMsg	  "warning"
 	  ModelReferenceDataLoggingMessage "warning"
-	  ModelReferenceNoExplicitFinalValueMsg	"none"
 	  ModelReferenceSymbolNameMessage "warning"
 	  ModelReferenceExtraNoncontSigs "error"
 	  StateNameClashWarn	  "none"
@@ -1032,11 +1006,10 @@ Model {
 	  UnderSpecifiedDimensionMsg "none"
 	  DebugExecutionForFMUViaOutOfProcess off
 	  ArithmeticOperatorsInVariantConditions "error"
-	  VariantConditionMismatch "none"
 	}
 	Simulink.HardwareCC {
-	  $ObjectID		  31
-	  Version		  "21.0.0"
+	  $ObjectID		  30
+	  Version		  "20.0.1"
 	  DisabledProps		  []
 	  Description		  ""
 	  Components		  []
@@ -1085,8 +1058,8 @@ Model {
 	  HardwareBoardFeatureSet "EmbeddedCoderHSP"
 	}
 	Simulink.ModelReferenceCC {
-	  $ObjectID		  32
-	  Version		  "21.0.0"
+	  $ObjectID		  31
+	  Version		  "20.0.1"
 	  DisabledProps		  []
 	  Description		  ""
 	  Components		  []
@@ -1105,8 +1078,8 @@ Model {
 	  SupportModelReferenceSimTargetCustomCode off
 	}
 	Simulink.SFSimCC {
-	  $ObjectID		  33
-	  Version		  "21.0.0"
+	  $ObjectID		  32
+	  Version		  "20.0.1"
 	  DisabledProps		  []
 	  Description		  ""
 	  Components		  []
@@ -1123,39 +1096,25 @@ Model {
 	  SimCustomLinkerFlags	  ""
 	  SFSimEcho		  on
 	  SimCtrlC		  on
-	  SimIntegrity		  "on"
+	  SimIntegrity		  on
 	  SimUseLocalCustomCode	  on
 	  SimParseCustomCode	  on
 	  SimAnalyzeCustomCode	  off
-	  SimDebugExecutionForCustomCode off
+	  SimBuildMode		  "sf_incremental_build"
 	  SimGenImportedTypeDefs  off
 	  ModelFunctionsGlobalVisibility "on"
 	  CompileTimeRecursionLimit 50
 	  EnableRuntimeRecursion  on
 	  MATLABDynamicMemAlloc	  on
 	  MATLABDynamicMemAllocThreshold 65536
-	  LegacyBehaviorForPersistentVarInContinuousTime off
 	  CustomCodeFunctionArrayLayout	[]
 	  DefaultCustomCodeFunctionArrayLayout "NotSpecified"
 	  CustomCodeUndefinedFunction "FilterOut"
-	  CustomCodeGlobalsAsFunctionIO	off
-	  DefaultCustomCodeDeterministicFunctions "None"
-	  CustomCodeDeterministicFunctions ""
-	  SimHardwareAcceleration "generic"
-	  SimTargetLang		  "C"
-	  GPUAcceleration	  off
-	  SimGPUMallocThreshold	  200
-	  SimGPUStackLimitPerThread 1024
-	  SimGPUErrorChecks	  off
-	  SimGPUCustomComputeCapability	""
-	  SimGPUCompilerFlags	  ""
-	  SimDLTargetLibrary	  "mkl-dnn"
-	  SimDLAutoTuning	  on
 	}
 	Simulink.RTWCC {
 	  $BackupClass		  "Simulink.RTWCC"
-	  $ObjectID		  34
-	  Version		  "21.0.0"
+	  $ObjectID		  33
+	  Version		  "20.0.1"
 	  Array {
 	    Type		    "Cell"
 	    Dimension		    17
@@ -1225,7 +1184,6 @@ Model {
 	  CodeProfilingInstrumentation "off"
 	  SILDebugging		  off
 	  TargetLang		  "C"
-	  GenerateGPUCode	  "None"
 	  IncludeBusHierarchyInRTWFileBlockHierarchyMap	off
 	  GenerateTraceInfo	  off
 	  GenerateTraceReport	  off
@@ -1241,29 +1199,12 @@ Model {
 	  RTWCustomCompilerOptimizations ""
 	  CheckMdlBeforeBuild	  "Off"
 	  SharedConstantsCachingThreshold 1024
-	  GPUKernelNamePrefix	  ""
-	  GPUDeviceID		  -1
-	  GPUMallocMode		  "discrete"
-	  GPUMallocThreshold	  200
-	  GPUStackLimitPerThread  1024
-	  GPUcuBLAS		  on
-	  GPUcuSOLVER		  on
-	  GPUcuFFT		  on
-	  GPUErrorChecks	  off
-	  GPUComputeCapability	  "3.5"
-	  GPUCustomComputeCapability ""
-	  GPUCompilerFlags	  ""
-	  GPUMaximumBlocksPerKernel 0
-	  DLTargetLibrary	  "none"
-	  DLAutoTuning		  on
-	  DLArmComputeVersion	  "19.05"
-	  DLArmComputeArch	  "unspecified"
 	  Array {
 	    Type		    "Handle"
 	    Dimension		    2
 	    Simulink.CodeAppCC {
-	      $ObjectID		      35
-	      Version		      "21.0.0"
+	      $ObjectID		      34
+	      Version		      "20.0.1"
 	      Array {
 		Type			"Cell"
 		Dimension		28
@@ -1352,8 +1293,8 @@ Model {
 	    }
 	    Simulink.GRTTargetCC {
 	      $BackupClass	      "Simulink.TargetCC"
-	      $ObjectID		      36
-	      Version		      "21.0.0"
+	      $ObjectID		      35
+	      Version		      "20.0.1"
 	      Array {
 		Type			"Cell"
 		Dimension		19
@@ -1409,6 +1350,7 @@ Model {
 	      SupportAbsoluteTime     on
 	      LogVarNameModifier      "rt_"
 	      MatFileLogging	      on
+	      MultiInstanceERTCode    off
 	      CodeInterfacePackaging  "Nonreusable function"
 	      PurelyIntegerCode	      off
 	      SupportNonFinite	      on
@@ -1459,8 +1401,8 @@ Model {
 	  }
 	}
 	SlCovCC.ConfigComp {
-	  $ObjectID		  37
-	  Version		  "21.0.0"
+	  $ObjectID		  36
+	  Version		  "20.0.1"
 	  DisabledProps		  []
 	  Description		  "Simulink Coverage Configuration Component"
 	  Components		  []
@@ -1476,6 +1418,7 @@ Model {
 	  CovFilter		  ""
 	  CovHTMLOptions	  ""
 	  CovNameIncrementing	  off
+	  CovHtmlReporting	  off
 	  CovForceBlockReductionOff on
 	  CovEnableCumulative	  on
 	  CovSaveCumulativeToWorkspaceVar off
@@ -1485,6 +1428,7 @@ Model {
 	  CovSaveOutputData	  on
 	  CovOutputDir		  "slcov_output/$ModelName$"
 	  CovDataFileName	  "$ModelName$_cvdata"
+	  CovShowResultsExplorer  on
 	  CovReportOnPause	  on
 	  CovModelRefEnable	  "off"
 	  CovModelRefExcluded	  ""
@@ -1508,11 +1452,11 @@ Model {
   }
   Simulink.ConfigSet {
     $PropName		    "ActiveConfigurationSet"
-    $ObjectID		    26
+    $ObjectID		    25
   }
   Object {
     $PropName		    "DataTransfer"
-    $ObjectID		    38
+    $ObjectID		    37
     $ClassName		    "Simulink.GlobalDataTransfer"
     DefaultTransitionBetweenSyncTasks "Ensure deterministic transfer (maximum delay)"
     DefaultTransitionBetweenAsyncTasks "Ensure data integrity only"
@@ -1652,7 +1596,6 @@ Model {
     Block {
       BlockType		      Math
       Operator		      "exp"
-      AlgorithmMethod	      "Exact"
       SignedPower	      off
       OutputSignalType	      "auto"
       SampleTime	      "-1"
@@ -1678,7 +1621,6 @@ Model {
       BlockType		      Outport
       Port		      "1"
       IconDisplay	      "Port number"
-      OutputFunctionCall      off
       OutMin		      "[]"
       OutMax		      "[]"
       OutDataTypeStr	      "Inherit: auto"
@@ -1700,21 +1642,6 @@ Model {
       VectorParamsAs1DForOutWhenUnconnected on
     }
     Block {
-      BlockType		      Product
-      Inputs		      "2"
-      Multiplication	      "Element-wise(.*)"
-      CollapseMode	      "All dimensions"
-      CollapseDim	      "1"
-      InputSameDT	      off
-      OutMin		      "[]"
-      OutMax		      "[]"
-      OutDataTypeStr	      "Inherit: Inherit via internal rule"
-      LockScale		      off
-      RndMeth		      "Floor"
-      SaturateOnIntegerOverflow	off
-      SampleTime	      "-1"
-    }
-    Block {
       BlockType		      Quantizer
       QuantizationInterval    "0.5"
       LinearizeAsGain	      on
@@ -1733,7 +1660,7 @@ Model {
       FunctionName	      "system"
       SFunctionModules	      "''"
       PortCounts	      "[]"
-      MultithreadedSim	      "auto"
+      MultiThreadCoSim	      "auto"
     }
     Block {
       BlockType		      Saturate
@@ -1774,8 +1701,6 @@ Model {
       C			      "1"
       D			      "1"
       InitialCondition	      "0.0"
-      ParameterTunability     "Auto"
-      AllowTunableDMatrix     off
       AbsoluteTolerance	      "auto"
       ContinuousStateAttributes	"''"
       Realization	      "auto"
@@ -1811,6 +1736,7 @@ Model {
       RTWMemSecDataInternal   "Inherit from model"
       RTWMemSecDataParameters "Inherit from model"
       SimViewingDevice	      off
+      ActiveForDiff	      off
       DataTypeOverride	      "UseLocalSettings"
       DataTypeOverrideAppliesTo	"AllNumericTypes"
       MinMaxOverflowLogging   "UseLocalSettings"
@@ -1818,8 +1744,8 @@ Model {
       MaskHideContents	      off
       SFBlockType	      "NONE"
       Variant		      off
-      VariantControlMode      "expression"
-      VariantActivationTime   "update diagram"
+      VariantControlMode      "Expression"
+      GeneratePreprocessorConditionals off
       AllowZeroVariantControls off
       PropagateVariantConditions off
       TreatAsGroupedWhenPropagatingVariantConditions on
@@ -1864,7 +1790,6 @@ Model {
       BlockType		      TransferFcn
       Numerator		      "[1]"
       Denominator	      "[1 2 1]"
-      ParameterTunability     "Auto"
       AbsoluteTolerance	      "auto"
       ContinuousStateAttributes	"''"
       Realization	      "auto"
@@ -1876,8 +1801,7 @@ Model {
   }
   System {
     Name		    "cvoo_g19_at_sens_est2"
-    Location		    [0, 25, 1440, 834]
-    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
+    Location		    [0, 25, 1554, 907]
     Open		    on
     PortBlocksUseCompactNotation off
     SetExecutionDomain	    off
@@ -1892,9 +1816,9 @@ Model {
     TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
     TiledPageScale	    1
     ShowPageBoundaries	    off
-    ZoomFactor		    "77"
+    ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "370"
+    SIDHighWatermark	    "350"
     SimulinkSubDomain	    "Simulink"
     Block {
       BlockType		      SubSystem
@@ -1912,7 +1836,6 @@ Model {
       System {
 	Name			"Actuators"
 	Location		[0, 25, 1440, 831]
-	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 	Open			off
 	PortBlocksUseCompactNotation off
 	SetExecutionDomain	off
@@ -2208,8 +2131,7 @@ Model {
       }
       System {
 	Name			"Observador"
-	Location		[0, 25, 1440, 834]
-	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
+	Location		[0, 25, 1554, 907]
 	Open			off
 	PortBlocksUseCompactNotation off
 	SetExecutionDomain	off
@@ -2224,7 +2146,7 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"114"
+	ZoomFactor		"125"
 	SimulinkSubDomain	"Simulink"
 	Block {
 	  BlockType		  Inport
@@ -2598,38 +2520,11 @@ Model {
       }
     }
     Block {
-      BlockType		      Scope
-      Name		      "Scope1"
-      SID		      "368"
-      Ports		      [1]
-      Position		      [270, 579, 300, 611]
-      ZOrder		      724
-      ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
-      "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
-      "ources','WiredSimulink',true,'DataLoggingVariableName','ScopeData1'),extmgr.Configuration('Visuals','Time Domain"
-      "',true,'SerializedDisplays',{struct('MinYLimReal','-93.52743','MaxYLimReal','23.81425','YLabelReal','','MinYLimM"
-      "ag','0.00000','MaxYLimMag','93.52743','LegendVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'A"
-      "xesColor',[0 0 0],'AxesTickColor',[0.686274509803922 0.686274509803922 0.686274509803922],'ColorOrder',[1 1 0.06"
-      "66666666666667;0.0745098039215686 0.623529411764706 1;1 0.411764705882353 0.16078431372549;0.392156862745098 0.8"
-      "31372549019608 0.0745098039215686;0.717647058823529 0.274509803921569 1;0.0588235294117647 1 1;1 0.0745098039215"
-      "686 0.650980392156863],'Title','%<SignalLabel>','LinePropertiesCache',{{}},'UserDefinedChannelNames',{{}},'NumLi"
-      "nes',1,'LineNames',{{'h sensores'}},'ShowContent',true,'Placement',1)},'DisplayPropertyDefaults',struct('MinYLim"
-      "Real','-93.52743','MaxYLimReal','23.81425','YLabelReal','','MinYLimMag','0.00000','MaxYLimMag','93.52743','Legen"
-      "dVisibility','off','XGrid',true,'YGrid',true,'PlotMagPhase',false,'AxesColor',[0 0 0],'AxesTickColor',[0.6862745"
-      "09803922 0.686274509803922 0.686274509803922],'ColorOrder',[0.0745098039215686 0.623529411764706 1;1 0.411764705"
-      "882353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.8313725"
-      "49019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuratio"
-      "n('Tools','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',true,'Version','2021a')),'Version'"
-      ",'2021a')"
-      NumInputPorts	      "1"
-      Floating		      off
-    }
-    Block {
       BlockType		      SubSystem
       Name		      "Seguimento de solo - referencia"
       SID		      "347"
       Ports		      [2, 1]
-      Position		      [-785, 380, -670, 440]
+      Position		      [-925, 350, -810, 410]
       ZOrder		      722
       RequestExecContextInheritance off
       ContentPreviewEnabled   on
@@ -2639,8 +2534,7 @@ Model {
       }
       System {
 	Name			"Seguimento de solo - referencia"
-	Location		[0, 25, 1440, 834]
-	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
+	Location		[0, 25, 1554, 907]
 	Open			off
 	PortBlocksUseCompactNotation off
 	SetExecutionDomain	off
@@ -2711,7 +2605,6 @@ Model {
 	  System {
 	    Name		    "MATLAB Function"
 	    Location		    [223, 338, 826, 833]
-	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    off
 	    PortBlocksUseCompactNotation off
 	    SetExecutionDomain	    off
@@ -2727,7 +2620,7 @@ Model {
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
 	    ZoomFactor		    "100"
-	    SIDHighWatermark	    "34"
+	    SIDHighWatermark	    "31"
 	    SimulinkSubDomain	    "Simulink"
 	    Block {
 	      BlockType		      Inport
@@ -2747,20 +2640,20 @@ Model {
 	    Block {
 	      BlockType		      Demux
 	      Name		      " Demux "
-	      SID		      "211::33"
+	      SID		      "211::30"
 	      Ports		      [1, 1]
 	      Position		      [270, 230, 320, 270]
-	      ZOrder		      24
+	      ZOrder		      21
 	      Outputs		      "1"
 	    }
 	    Block {
 	      BlockType		      S-Function
 	      Name		      " SFunction "
-	      SID		      "211::32"
+	      SID		      "211::29"
 	      Tag		      "Stateflow S-Function 2"
 	      Ports		      [2, 2]
 	      Position		      [180, 100, 230, 160]
-	      ZOrder		      23
+	      ZOrder		      20
 	      FunctionName	      "sf_sfun"
 	      PortCounts	      "[2 2]"
 	      SFunctionDeploymentMode off
@@ -2774,9 +2667,9 @@ Model {
 	    Block {
 	      BlockType		      Terminator
 	      Name		      " Terminator "
-	      SID		      "211::34"
+	      SID		      "211::31"
 	      Position		      [460, 241, 480, 259]
-	      ZOrder		      25
+	      ZOrder		      22
 	    }
 	    Block {
 	      BlockType		      Outport
@@ -2786,15 +2679,15 @@ Model {
 	      ZOrder		      -5
 	    }
 	    Line {
-	      ZOrder		      24
+	      ZOrder		      19
 	      SrcBlock		      "dist"
 	      SrcPort		      1
-	      Points		      [120, 0]
+	      Points		      [80, 0; 0, 5]
 	      DstBlock		      " SFunction "
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      25
+	      ZOrder		      20
 	      SrcBlock		      "u0"
 	      SrcPort		      1
 	      DstBlock		      " SFunction "
@@ -2802,24 +2695,26 @@ Model {
 	    }
 	    Line {
 	      Name		      "altitude_solo"
-	      ZOrder		      26
+	      ZOrder		      21
 	      Labels		      [0, 0]
 	      SrcBlock		      " SFunction "
 	      SrcPort		      2
+	      Points		      [111, 0; 0, -35]
 	      DstBlock		      "altitude_solo"
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      27
+	      ZOrder		      22
 	      SrcBlock		      " Demux "
 	      SrcPort		      1
 	      DstBlock		      " Terminator "
 	      DstPort		      1
 	    }
 	    Line {
-	      ZOrder		      28
+	      ZOrder		      23
 	      SrcBlock		      " SFunction "
 	      SrcPort		      1
+	      Points		      [16, 0; 0, 135]
 	      DstBlock		      " Demux "
 	      DstPort		      1
 	    }
@@ -3117,8 +3012,7 @@ Model {
       }
       System {
 	Name			"Sensores"
-	Location		[0, 25, 1440, 834]
-	SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
+	Location		[0, 25, 1554, 907]
 	Open			off
 	PortBlocksUseCompactNotation off
 	SetExecutionDomain	off
@@ -3133,35 +3027,29 @@ Model {
 	TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 	TiledPageScale		1
 	ShowPageBoundaries	off
-	ZoomFactor		"223"
+	ZoomFactor		"125"
 	SimulinkSubDomain	"Simulink"
 	Block {
 	  BlockType		  Inport
 	  Name			  "In1"
 	  SID			  "341"
-	  Position		  [430, 268, 460, 282]
+	  Position		  [325, 23, 355, 37]
 	  ZOrder		  718
-	  BlockMirror		  on
-	  NameLocation		  "top"
 	}
 	Block {
 	  BlockType		  Inport
 	  Name			  "In2"
 	  SID			  "342"
-	  Position		  [430, 348, 460, 362]
+	  Position		  [350, 103, 380, 117]
 	  ZOrder		  719
-	  BlockMirror		  on
-	  NameLocation		  "top"
 	  Port			  "2"
 	}
 	Block {
 	  BlockType		  Inport
 	  Name			  "In3"
 	  SID			  "343"
-	  Position		  [430, 438, 460, 452]
+	  Position		  [515, 183, 545, 197]
 	  ZOrder		  720
-	  BlockMirror		  on
-	  NameLocation		  "top"
 	  Port			  "3"
 	}
 	Block {
@@ -3178,7 +3066,6 @@ Model {
 	  System {
 	    Name		    "din_pdin_vel_ar"
 	    Location		    [3, 25, 2514, 1440]
-	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    off
 	    PortBlocksUseCompactNotation off
 	    SetExecutionDomain	    off
@@ -3258,7 +3145,6 @@ Model {
 	      System {
 		Name			"Conversor A/D"
 		Location		[0, 25, 2511, 1440]
-		SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 		Open			off
 		PortBlocksUseCompactNotation off
 		SetExecutionDomain	off
@@ -3318,14 +3204,14 @@ Model {
 		}
 		Block {
 		  BlockType		  Reference
-		  Name			  "ruÃ­do a 1.5 LSB rms"
+		  Name			  "ruído a 1.5 LSB rms"
 		  SID			  "197"
 		  Ports			  [0, 1]
 		  Position		  [155, 90, 185, 120]
 		  ZOrder		  342
 		  BlockRotation		  270
 		  NameLocation		  "right"
-		  LibraryVersion	  "1.480"
+		  LibraryVersion	  "1.465"
 		  SourceBlock		  "simulink/Sources/Band-Limited\nWhite Noise"
 		  SourceType		  "Band-Limited White Noise."
 		  SourceProductBaseCode	  "SL"
@@ -3363,7 +3249,7 @@ Model {
 		}
 		Line {
 		  ZOrder		  3
-		  SrcBlock		  "ruÃ­do a 1.5 LSB rms"
+		  SrcBlock		  "ruído a 1.5 LSB rms"
 		  SrcPort		  1
 		  DstBlock		  "Sum1"
 		  DstPort		  2
@@ -3391,15 +3277,15 @@ Model {
 		}
 		Annotation {
 		  SID			  "200"
-		  Name			  "saturaÃ§Ã£o_conversor"
-		  Position		  [167, 3, 262, 15]
+		  Name			  "saturação_conversor"
+		  Position		  [167, 3, 263, 17]
 		  InternalMargins	  [0, 0, 0, 0]
 		  ZOrder		  -1
 		}
 		Annotation {
 		  SID			  "199"
-		  Name			  "quantizaÃ§Ã£o_conversor"
-		  Position		  [222, 58, 327, 70]
+		  Name			  "quantização_conversor"
+		  Position		  [222, 58, 328, 72]
 		  InternalMargins	  [0, 0, 0, 0]
 		  ZOrder		  -2
 		}
@@ -3680,15 +3566,14 @@ Model {
 	  Name			  "din_radio_altimeter"
 	  SID			  "273"
 	  Ports			  [1, 1]
-	  Position		  [270, 415, 310, 475]
+	  Position		  [260, 415, 300, 475]
 	  ZOrder		  717
 	  BlockMirror		  on
 	  RequestExecContextInheritance	off
 	  ContentPreviewEnabled	  on
 	  System {
 	    Name		    "din_radio_altimeter"
-	    Location		    [0, 25, 1440, 834]
-	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
+	    Location		    [0, 25, 2560, 1371]
 	    Open		    off
 	    PortBlocksUseCompactNotation off
 	    SetExecutionDomain	    off
@@ -3703,7 +3588,7 @@ Model {
 	    TiledPaperMargins	    [0.500000, 0.500000, 0.500000, 0.500000]
 	    TiledPageScale	    1
 	    ShowPageBoundaries	    off
-	    ZoomFactor		    "143"
+	    ZoomFactor		    "270"
 	    SimulinkSubDomain	    "Simulink"
 	    Block {
 	      BlockType		      Inport
@@ -3732,7 +3617,7 @@ Model {
 	      ZOrder		      725
 	      BlockRotation	      270
 	      NameLocation	      "right"
-	      Value		      "offset_alt"
+	      Value		      "200"
 	    }
 	    Block {
 	      BlockType		      Constant
@@ -3742,7 +3627,7 @@ Model {
 	      ZOrder		      727
 	      BlockRotation	      270
 	      NameLocation	      "right"
-	      Value		      "offset_alt"
+	      Value		      "200"
 	    }
 	    Block {
 	      BlockType		      SubSystem
@@ -3758,7 +3643,6 @@ Model {
 	      System {
 		Name			"Conversor A/D"
 		Location		[0, 25, 2560, 1371]
-		SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 		Open			off
 		PortBlocksUseCompactNotation off
 		SetExecutionDomain	off
@@ -3818,14 +3702,14 @@ Model {
 		}
 		Block {
 		  BlockType		  Reference
-		  Name			  "ruÃ­do a 1.5 LSB rms"
+		  Name			  "ruído a 1.5 LSB rms"
 		  SID			  "283"
 		  Ports			  [0, 1]
 		  Position		  [155, 90, 185, 120]
 		  ZOrder		  342
 		  BlockRotation		  270
 		  NameLocation		  "right"
-		  LibraryVersion	  "1.480"
+		  LibraryVersion	  "1.465"
 		  SourceBlock		  "simulink/Sources/Band-Limited\nWhite Noise"
 		  SourceType		  "Band-Limited White Noise."
 		  SourceProductBaseCode	  "SL"
@@ -3863,7 +3747,7 @@ Model {
 		}
 		Line {
 		  ZOrder		  3
-		  SrcBlock		  "ruÃ­do a 1.5 LSB rms"
+		  SrcBlock		  "ruído a 1.5 LSB rms"
 		  SrcPort		  1
 		  DstBlock		  "Sum1"
 		  DstPort		  2
@@ -3891,15 +3775,15 @@ Model {
 		}
 		Annotation {
 		  SID			  "286"
-		  Name			  "saturaÃ§Ã£o_conversor"
-		  Position		  [172, 3, 267, 15]
+		  Name			  "saturação_conversor"
+		  Position		  [172, 3, 268, 17]
 		  InternalMargins	  [0, 0, 0, 0]
 		  ZOrder		  -1
 		}
 		Annotation {
 		  SID			  "285"
-		  Name			  "quantizaÃ§Ã£o_conversor"
-		  Position		  [232, 55, 337, 67]
+		  Name			  "quantização_conversor"
+		  Position		  [232, 55, 338, 69]
 		  InternalMargins	  [0, 0, 0, 0]
 		  ZOrder		  -2
 		}
@@ -3907,7 +3791,7 @@ Model {
 	    }
 	    Block {
 	      BlockType		      SubSystem
-	      Name		      "DinÃ¢mica do radio altimetro"
+	      Name		      "Dinâmica do sensor de razão de picada"
 	      SID		      "287"
 	      Ports		      [1, 1]
 	      Position		      [280, 85, 320, 145]
@@ -3916,9 +3800,8 @@ Model {
 	      RequestExecContextInheritance off
 	      ContentPreviewEnabled   on
 	      System {
-		Name			"DinÃ¢mica do radio altimetro"
-		Location		[0, 25, 1440, 834]
-		SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
+		Name			"Dinâmica do sensor de razão de picada"
+		Location		[0, 25, 2560, 1371]
 		Open			off
 		PortBlocksUseCompactNotation off
 		SetExecutionDomain	off
@@ -3933,7 +3816,7 @@ Model {
 		TiledPaperMargins	[0.500000, 0.500000, 0.500000, 0.500000]
 		TiledPageScale		1
 		ShowPageBoundaries	off
-		ZoomFactor		"129"
+		ZoomFactor		"243"
 		SimulinkSubDomain	"Simulink"
 		Block {
 		  BlockType		  Inport
@@ -3951,14 +3834,6 @@ Model {
 		  BlockRotation		  270
 		  NameLocation		  "right"
 		  Value			  "Offset_ra"
-		}
-		Block {
-		  BlockType		  Product
-		  Name			  "Product"
-		  SID			  "370"
-		  Ports			  [2, 1]
-		  Position		  [165, 92, 195, 123]
-		  ZOrder		  353
 		}
 		Block {
 		  BlockType		  Scope
@@ -4017,9 +3892,11 @@ Model {
 		  Name			  "ruido radio altimetro"
 		  SID			  "293"
 		  Ports			  [0, 1]
-		  Position		  [20, 100, 50, 130]
+		  Position		  [210, 90, 240, 120]
 		  ZOrder		  339
-		  LibraryVersion	  "1.480"
+		  BlockRotation		  270
+		  NameLocation		  "right"
+		  LibraryVersion	  "1.465"
 		  SourceBlock		  "simulink/Sources/Band-Limited\nWhite Noise"
 		  SourceType		  "Band-Limited White Noise."
 		  SourceProductBaseCode	  "SL"
@@ -4050,6 +3927,13 @@ Model {
 		  SID			  "295"
 		  Position		  [525, 28, 555, 42]
 		  ZOrder		  349
+		}
+		Line {
+		  ZOrder		  1
+		  SrcBlock		  "ruido radio altimetro"
+		  SrcPort		  1
+		  DstBlock		  "Sum"
+		  DstPort		  2
 		}
 		Line {
 		  ZOrder		  2
@@ -4099,34 +3983,9 @@ Model {
 		  }
 		  Branch {
 		    ZOrder		    10
-		    Points		    [27, 0]
-		    Branch {
-		    ZOrder		    17
 		    DstBlock		    "Sum"
 		    DstPort		    1
-		    }
-		    Branch {
-		    ZOrder		    14
-		    Points		    [0, 65]
-		    DstBlock		    "Product"
-		    DstPort		    1
-		    }
 		  }
-		}
-		Line {
-		  ZOrder		  15
-		  SrcBlock		  "ruido radio altimetro"
-		  SrcPort		  1
-		  DstBlock		  "Product"
-		  DstPort		  2
-		}
-		Line {
-		  ZOrder		  18
-		  SrcBlock		  "Product"
-		  SrcPort		  1
-		  Points		  [25, 0]
-		  DstBlock		  "Sum"
-		  DstPort		  2
 		}
 	      }
 	    }
@@ -4217,7 +4076,7 @@ Model {
 	    }
 	    Line {
 	      ZOrder		      11
-	      SrcBlock		      "DinÃ¢mica do radio altimetro"
+	      SrcBlock		      "Dinâmica do sensor de razão de picada"
 	      SrcPort		      1
 	      DstBlock		      "Gain1"
 	      DstPort		      1
@@ -4282,7 +4141,7 @@ Model {
 	      ZOrder		      20
 	      SrcBlock		      "Sum9"
 	      SrcPort		      1
-	      DstBlock		      "DinÃ¢mica do radio altimetro"
+	      DstBlock		      "Dinâmica do sensor de razão de picada"
 	      DstPort		      1
 	    }
 	  }
@@ -4292,7 +4151,7 @@ Model {
 	  Name			  "din_razao_angular"
 	  SID			  "122"
 	  Ports			  [1, 1]
-	  Position		  [270, 325, 310, 385]
+	  Position		  [285, 325, 325, 385]
 	  ZOrder		  348
 	  BlockMirror		  on
 	  RequestExecContextInheritance	off
@@ -4300,7 +4159,6 @@ Model {
 	  System {
 	    Name		    "din_razao_angular"
 	    Location		    [3, 25, 2514, 1440]
-	    SystemRect		    [0.000000, 0.000000, 0.000000, 0.000000]
 	    Open		    off
 	    PortBlocksUseCompactNotation off
 	    SetExecutionDomain	    off
@@ -4350,7 +4208,6 @@ Model {
 	      System {
 		Name			"Conversor A/D"
 		Location		[3, 25, 2514, 1440]
-		SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 		Open			off
 		PortBlocksUseCompactNotation off
 		SetExecutionDomain	off
@@ -4410,14 +4267,14 @@ Model {
 		}
 		Block {
 		  BlockType		  Reference
-		  Name			  "ruÃ­do a 1.5 LSB rms"
+		  Name			  "ruído a 1.5 LSB rms"
 		  SID			  "136"
 		  Ports			  [0, 1]
 		  Position		  [155, 90, 185, 120]
 		  ZOrder		  342
 		  BlockRotation		  270
 		  NameLocation		  "right"
-		  LibraryVersion	  "1.480"
+		  LibraryVersion	  "1.465"
 		  SourceBlock		  "simulink/Sources/Band-Limited\nWhite Noise"
 		  SourceType		  "Band-Limited White Noise."
 		  SourceProductBaseCode	  "SL"
@@ -4455,7 +4312,7 @@ Model {
 		}
 		Line {
 		  ZOrder		  3
-		  SrcBlock		  "ruÃ­do a 1.5 LSB rms"
+		  SrcBlock		  "ruído a 1.5 LSB rms"
 		  SrcPort		  1
 		  DstBlock		  "Sum1"
 		  DstPort		  2
@@ -4483,15 +4340,15 @@ Model {
 		}
 		Annotation {
 		  SID			  "144"
-		  Name			  "saturaÃ§Ã£o_conversor"
-		  Position		  [167, 3, 262, 15]
+		  Name			  "saturação_conversor"
+		  Position		  [167, 3, 263, 17]
 		  InternalMargins	  [0, 0, 0, 0]
 		  ZOrder		  -1
 		}
 		Annotation {
 		  SID			  "143"
-		  Name			  "quantizaÃ§Ã£o_conversor"
-		  Position		  [222, 58, 327, 70]
+		  Name			  "quantização_conversor"
+		  Position		  [222, 58, 328, 72]
 		  InternalMargins	  [0, 0, 0, 0]
 		  ZOrder		  -2
 		}
@@ -4499,7 +4356,7 @@ Model {
 	    }
 	    Block {
 	      BlockType		      SubSystem
-	      Name		      "DinÃ¢mica do sensor de razÃ£o de picada"
+	      Name		      "Dinâmica do sensor de razão de picada"
 	      SID		      "147"
 	      Ports		      [1, 1]
 	      Position		      [280, 85, 320, 145]
@@ -4508,9 +4365,8 @@ Model {
 	      RequestExecContextInheritance off
 	      ContentPreviewEnabled   on
 	      System {
-		Name			"DinÃ¢mica do sensor de razÃ£o de picada"
+		Name			"Dinâmica do sensor de razão de picada"
 		Location		[0, 25, 2511, 1440]
-		SystemRect		[0.000000, 0.000000, 0.000000, 0.000000]
 		Open			off
 		PortBlocksUseCompactNotation off
 		SetExecutionDomain	off
@@ -4596,14 +4452,14 @@ Model {
 		}
 		Block {
 		  BlockType		  Reference
-		  Name			  "ruÃ­do sensor razao picada"
+		  Name			  "ruído sensor razao picada"
 		  SID			  "127"
 		  Ports			  [0, 1]
 		  Position		  [210, 90, 240, 120]
 		  ZOrder		  339
 		  BlockRotation		  270
 		  NameLocation		  "right"
-		  LibraryVersion	  "1.480"
+		  LibraryVersion	  "1.465"
 		  SourceBlock		  "simulink/Sources/Band-Limited\nWhite Noise"
 		  SourceType		  "Band-Limited White Noise."
 		  SourceProductBaseCode	  "SL"
@@ -4637,7 +4493,7 @@ Model {
 		}
 		Line {
 		  ZOrder		  1
-		  SrcBlock		  "ruÃ­do sensor razao picada"
+		  SrcBlock		  "ruído sensor razao picada"
 		  SrcPort		  1
 		  DstBlock		  "Sum"
 		  DstPort		  2
@@ -4746,12 +4602,12 @@ Model {
 	      ZOrder		      1
 	      SrcBlock		      "In1"
 	      SrcPort		      1
-	      DstBlock		      "DinÃ¢mica do sensor de razÃ£o de picada"
+	      DstBlock		      "Dinâmica do sensor de razão de picada"
 	      DstPort		      1
 	    }
 	    Line {
 	      ZOrder		      2
-	      SrcBlock		      "DinÃ¢mica do sensor de razÃ£o de picada"
+	      SrcBlock		      "Dinâmica do sensor de razão de picada"
 	      SrcPort		      1
 	      DstBlock		      "Conversor A/D"
 	      DstPort		      1
@@ -4797,7 +4653,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "Conv_out"
 	  SID			  "344"
-	  Position		  [90, 268, 120, 282]
+	  Position		  [20, 348, 50, 362]
 	  ZOrder		  721
 	  BlockMirror		  on
 	}
@@ -4805,7 +4661,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "Out2"
 	  SID			  "345"
-	  Position		  [90, 348, 120, 362]
+	  Position		  [20, 368, 50, 382]
 	  ZOrder		  722
 	  BlockMirror		  on
 	  Port			  "2"
@@ -4814,7 +4670,7 @@ Model {
 	  BlockType		  Outport
 	  Name			  "Out3"
 	  SID			  "346"
-	  Position		  [90, 438, 120, 452]
+	  Position		  [20, 388, 50, 402]
 	  ZOrder		  723
 	  BlockMirror		  on
 	  Port			  "3"
@@ -4823,6 +4679,7 @@ Model {
 	  ZOrder		  936
 	  SrcBlock		  "din_razao_angular"
 	  SrcPort		  1
+	  Points		  [-109, 0; 0, 20]
 	  DstBlock		  "Out2"
 	  DstPort		  1
 	}
@@ -4830,6 +4687,7 @@ Model {
 	  ZOrder		  932
 	  SrcBlock		  "In1"
 	  SrcPort		  1
+	  Points		  [44, 0; 0, 245]
 	  DstBlock		  "din_pdin_vel_ar"
 	  DstPort		  1
 	}
@@ -4837,6 +4695,7 @@ Model {
 	  ZOrder		  935
 	  SrcBlock		  "din_pdin_vel_ar"
 	  SrcPort		  1
+	  Points		  [-129, 0; 0, 80]
 	  DstBlock		  "Conv_out"
 	  DstPort		  1
 	}
@@ -4844,6 +4703,7 @@ Model {
 	  ZOrder		  933
 	  SrcBlock		  "In2"
 	  SrcPort		  1
+	  Points		  [7, 0; 0, 245]
 	  DstBlock		  "din_razao_angular"
 	  DstPort		  1
 	}
@@ -4851,6 +4711,7 @@ Model {
 	  ZOrder		  934
 	  SrcBlock		  "In3"
 	  SrcPort		  1
+	  Points		  [19, 0; 0, 255]
 	  DstBlock		  "din_radio_altimeter"
 	  DstPort		  1
 	}
@@ -4858,6 +4719,7 @@ Model {
 	  ZOrder		  937
 	  SrcBlock		  "din_radio_altimeter"
 	  SrcPort		  1
+	  Points		  [-100, 0; 0, -50]
 	  DstBlock		  "Out3"
 	  DstPort		  1
 	}
@@ -5032,7 +4894,7 @@ Model {
       Name		      "To Workspace9"
       SID		      "65"
       Ports		      [1]
-      Position		      [-500, 355, -410, 385]
+      Position		      [-500, 410, -410, 440]
       ZOrder		      272
       VariableName	      "u_ref"
       MaxDataPoints	      "inf"
@@ -5044,7 +4906,7 @@ Model {
       Name		      "erro na altitude desejada"
       SID		      "227"
       Ports		      [1]
-      Position		      [-540, 394, -510, 426]
+      Position		      [-645, 364, -615, 396]
       ZOrder		      697
       ScopeSpecificationString "Simulink.scopes.TimeScopeBlockCfg('CurrentConfiguration', extmgr.ConfigurationSet(extm"
       "gr.Configuration('Core','General UI',true),extmgr.Configuration('Core','Source UI',true),extmgr.Configuration('S"
@@ -5062,7 +4924,7 @@ Model {
       "2353 0.16078431372549;1 1 0.0666666666666667;0.717647058823529 0.274509803921569 1;0.392156862745098 0.831372549"
       "019608 0.0745098039215686;0.0588235294117647 1 1;1 0.0745098039215686 0.650980392156863])),extmgr.Configuration("
       "'Tools','Plot Navigation',true),extmgr.Configuration('Tools','Measurements',true,'Version','2020a')),'Version','"
-      "2021a','Position',[1005 219.4 560 420])"
+      "2020a','Position',[1005 219.4 560 420])"
       NumInputPorts	      "1"
       Floating		      off
     }
@@ -5424,7 +5286,7 @@ Model {
       Points		      [18, 0]
       Branch {
 	ZOrder			626
-	Points			[0, 85]
+	Points			[0, 140]
 	DstBlock		"To Workspace9"
 	DstPort			1
       }
@@ -5462,7 +5324,7 @@ Model {
       Points		      [-515, 0]
       Branch {
 	ZOrder			959
-	Points			[-464, 0; 0, -75]
+	Points			[-594, 0; 0, -105]
 	DstBlock		"Seguimento de solo - referencia"
 	DstPort			1
       }
@@ -5523,21 +5385,11 @@ Model {
     Line {
       Name		      "h sensores"
       ZOrder		      954
+      Labels		      [-1, 0]
       SrcBlock		      "Sensores"
       SrcPort		      3
-      Points		      [-57, 0]
-      Branch {
-	ZOrder			1000
-	Points			[0, 65]
-	DstBlock		"Scope1"
-	DstPort			1
-      }
-      Branch {
-	ZOrder			999
-	Labels			[-1, 0]
-	DstBlock		"Observador"
-	DstPort			4
-      }
+      DstBlock		      "Observador"
+      DstPort		      4
     }
     Line {
       Name		      "h estimado"
@@ -5545,7 +5397,7 @@ Model {
       Labels		      [0, 0]
       SrcBlock		      "Observador"
       SrcPort		      5
-      Points		      [-999, 0; 0, -105]
+      Points		      [-1133, 0; 0, -135]
       DstBlock		      "Seguimento de solo - referencia"
       DstPort		      2
     }
@@ -5562,14 +5414,14 @@ Model {
 }
 #Finite State Machines
 #
-#   Stateflow 80000041
+#   Stateflow 80000032
 #
 #
 Stateflow {
   machine {
     id			    1
     name		    "cvoo_g19_at_sens_est2"
-    sfVersion		    80000041
+    sfVersion		    80000032
     firstTarget		    10
   }
   chart {

@@ -328,8 +328,9 @@ ft = 0.3048; %ft to m
 h_ra_max = 1500*ft;
 h_ra_min = 0;
 G_ra = 10e-3/ft; %Vdc/ft
-ra_rms = 0.015*cond_ini.h0; %ruido relativo, assumir h \aprox cte
+ra_rms = 0.015; %ruido relativo
 Offset_ra = 0;
+offset_alt = 200;
 fat_conv_ra = 1/3;
 %[ra_rms^2/f_amost]
 
@@ -375,12 +376,12 @@ L=lqe(a_h_pt_h,ge,c_h_pt_h,qe,re);
 x0_e = [0 0 0 0 0];
 
 %val=sim('cvoo_g19_servomecanismo','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
-val=sim('cvoo_g19_at_sens_est2','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
+val=sim('cvoo_g19_at_sens_est_bom','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 %val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
 %plots
 plots(val)
-
+g
 % %% RP2 - controlo modal
 % % fugoide
 % wn_fug = 0.6;
