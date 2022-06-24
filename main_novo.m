@@ -266,7 +266,7 @@ dh_pt_max=0.5;
 %dh_max=5; %m
 
 % extremos usados na matriz R:
-de_max = 0.2*deg;
+de_max = 0.3*deg;
 dsp_max = 5*deg;
 
 Q = diag([1/du_max^2 1/dw_max^2 1/dq_max^2 1/dh_pt_max^2 0.1/du_max^2 0.1/dh_pt_max^2]);
