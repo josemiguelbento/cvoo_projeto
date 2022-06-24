@@ -95,7 +95,6 @@ damp(a_h)
 %formulação do modelo da aeronave e representar graficamente os seus polos
 %e zeros
 sys = ss(a_h,b_h,c_h,d_h);
-%pzmap(sys)
 
 %agora vamos estudar o comportamento dos modos longitudinais
 [wn,zeta,p]=damp(a_h);
