@@ -62,9 +62,9 @@ gg=ylabel('razão picada (rad/s)');
 
 
 subplot(3,3,9)
-gg=plot(val.tout,5*cond_ini.u0+val.h(:,:),val.tout,5*cond_ini.u0+val.h_e(:,:),val.tout,val.h_solo(:,:)+val.h_ref(:,:));
+gg=plot(val.tout,val.h(:,:),val.tout,val.h1(:,:),val.tout,val.h_solo(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
-
 gg=ylabel('altitude (m)');
+gg = legend('h_abs','h_abs_ref','h_solo');
 end

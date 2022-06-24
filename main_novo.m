@@ -1,4 +1,4 @@
-%% tema 50 - Ximas-1 - velocidades ar e subida - seguimento de solo
+%% tema 50 - Ximas-1 - velocidades ar e subida - aseguimento de solo
 %% RP1
 clear
 close all
@@ -346,6 +346,11 @@ ref_aux = 0:2.5*u0:5*u0;
 p = polyfit(dist_aux,ref_aux,2);
 altitude_solo = 5*u0;
 
+%simulacao
+vel_vento = 10; %m/s
+h_solo_0 = 5* cond_ini.u0; %m
+h_seguimento = 100; %m
+
 
 %% Estimador - vamos usar as matrizes do estado aumentado com h
 a_h_pt_h = [
@@ -375,10 +380,11 @@ re=1000*diag([1 1 1]);
 L=lqe(a_h_pt_h,ge,c_h_pt_h,qe,re);
 [ae,be,ce,de]=estim(a_h_pt_h,b_h_pt_h,c_h_pt_h,d_h_pt_h,L,[1, 2, 3],[1, 2]);
 
-x0_e = [0 0 0 0 cond_ini.h0];
+x0_e = [0 0 0 0 cond_ini.h0+h_solo_0];
+
 
 %val=sim('cvoo_g19_servomecanismo','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
-val=sim('cvoo_g19_at_sens_est_bombom','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
+val=sim('cvoo_g19_seguimento_solo','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 %val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
 %plots
