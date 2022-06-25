@@ -4,8 +4,8 @@ f=figure();
 f.Position = [50 100 1500 450];
 
 subplot(3,3,[1,2])
-gg=plot(val.tout,val.u(:,:),val.tout,val.u_e(:,:),val.tout,val.u_ref(:,:));
-%legend('state','reference');
+gg=plot(val.tout,val.h_pt_ref(:,:),val.tout,val.h_pt(:,:));
+legend('reference','state');
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
 
@@ -16,6 +16,7 @@ subplot(3,3,3)
 gg=plot(val.de.time,180/pi*val.de.signals.values(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
+
 gg=ylabel('elevator (deg)');
 
 
