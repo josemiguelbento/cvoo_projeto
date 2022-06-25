@@ -37,15 +37,15 @@ gg=xlabel('Time (s)');
 gg=ylabel('spoiler (deg)');
 
 
-subplot(3,3,7)
-gg=plot(val.tout,val.w(:,:),val.tout,val.w_e(:,:));
-set(gg,'LineWidth',1.5)
-gg=xlabel('Time (s)');
+% subplot(3,3,7)
+% gg=plot(val.tout,val.w(:,:),val.tout,val.w_e(:,:));
+% set(gg,'LineWidth',1.5)
+% gg=xlabel('Time (s)');
+% 
+% gg=ylabel('velocidade vertical (m/s)');
 
-gg=ylabel('velocidade vertical (m/s)');
 
-
-subplot(3,3,8)
+subplot(3,3,9)
 gg=plot(val.tout,val.q(:,:),val.tout,val.q_e(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
@@ -61,10 +61,10 @@ gg=ylabel('razão picada (rad/s)');
 % gg=ylabel('angulo de picada (deg)');
 
 
-subplot(3,3,9)
+subplot(3,3,[7,8])
 gg=plot(val.tout,val.h(:,:),val.tout,val.h1(:,:),val.tout,val.h_solo(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
 gg=ylabel('altitude (m)');
-gg = legend('h_abs','h_abs_ref','h_solo');
+%gg = legend('h_abs','h_abs_ref','h_solo');
 end

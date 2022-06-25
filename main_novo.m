@@ -285,7 +285,7 @@ damp(a_h_pt_int-b_h_pt_int*K_lqr)
 %definição das condicoes iniciais para o simulink
 x0 = [0 0 0 0];
 %x0_h = [0 0 0 0 0];
-finaltime = 100; % tempo de duração da simulação
+finaltime = 200; % tempo de duração da simulação
 StepSize = 0.01;
 
 %parametros dos sensores pq isto estava a ficar uma confusao
@@ -347,7 +347,7 @@ altitude_solo = 5*u0;
 
 %simulacao
 vel_vento = 10; %m/s
-h_solo_0 = 5* cond_ini.u0; %m
+h_solo_0 = 5* cond_ini.u0+100; %m
 h_seguimento = 100; %m
 
 
@@ -375,7 +375,7 @@ d_h_pt_h = zeros(3,2);
 ge=eye(size(a_h_pt_h));
 qe=diag([1 1 1 1 1]);
 %re=100000*diag([1 1 1]);
-re=1000*diag([1 1 1]);
+re=10000*diag([1 1 1]);
 L=lqe(a_h_pt_h,ge,c_h_pt_h,qe,re);
 [ae,be,ce,de]=estim(a_h_pt_h,b_h_pt_h,c_h_pt_h,d_h_pt_h,L,[1, 2, 3],[1, 2]);
 
@@ -383,7 +383,7 @@ x0_e = [0 0 0 0 cond_ini.h0+h_solo_0];
 
 
 %val=sim('cvoo_g19_servomecanismo','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
-val=sim('cvoo_g19_seguimento_solo','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
+val=sim('cvoo_g19_seguimento_solo_ze202a','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 %val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
 %plots
