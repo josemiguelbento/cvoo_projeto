@@ -383,7 +383,7 @@ x0_e = [0 0 0 0 cond_ini.h0+h_solo_0];
 
 
 %val=sim('cvoo_g19_servomecanismo','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
-val=sim('cvoo_g19_seguimento_solo_ze202a','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
+val=sim('cvoo_g19_falta_ficar_bonito_2020a','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 %val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
 %plots
