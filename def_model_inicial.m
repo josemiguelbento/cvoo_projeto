@@ -13,6 +13,7 @@ function [cond_ini, max_deflec, inert, wing, deriv] = def_model()
     cond_ini.de0 = -7.44 *deg ;
     cond_ini.da0 =0.58 *deg ;
     cond_ini.dr0 = -0.01 *deg ;
+    cond_ini.dsp0 = 0 *deg ;
     
     %maximum control surfaces deflection
     max_deflec.demax = +28 *deg ;
