@@ -308,7 +308,7 @@ Offset_sensq = 2.5;
 conv_max = 5; %V
 conv_min = 0; %V
 conv_bit = 12;
-conv_res = (conv_max - conv_min)/(2*(2^conv_bit)-1);
+conv_res = (conv_max - conv_min)/(2^conv_bit);
 conv_rms = 1.5*conv_res;
 fat_quant = (conv_max-conv_min)/2^12; 
 
@@ -383,7 +383,7 @@ x0_e = [0 0 0 0 cond_ini.h0+h_solo_0];
 
 
 %val=sim('cvoo_g19_servomecanismo','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
-val=sim('cvoo_g19_falta_ficar_bonito_2020a','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
+val=sim('cvoo_g19_falta_ficar_bonito_ZE','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 %val=sim('cvoo_g19','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
 %plots
