@@ -199,11 +199,12 @@ c_h_pt_h = [
 %c_h_pt_h = eye(size(a_h_pt_h));
 d_h_pt_h = zeros(3,2);
 %d_h_pt_h = zeros(size(b_h_pt_h));
-
 ge=eye(size(a_h_pt_h));
-qe=diag([1 1 1 1 1]);
+%qe=diag([1 1 1 1 1]);
 %re=100000*diag([1 1 1]);
-re=1000*diag([1 1 1]);
+%re=1000*diag([1 1 1]);
+qe=diag([0.01 0.01 0.01 0.01 0.01]);
+re=diag([1.5*5/2^12 4.4*pi/180+1.5*5/2^12 0.015*100]);
 L=lqe(a_h_pt_h,ge,c_h_pt_h,qe,re);
 [ae,be,ce,de]=estim(a_h_pt_h,b_h_pt_h,c_h_pt_h,d_h_pt_h,L,[1, 2, 3],[1, 2]);
 
