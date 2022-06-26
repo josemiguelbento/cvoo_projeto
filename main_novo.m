@@ -285,7 +285,7 @@ damp(a_h_pt_int-b_h_pt_int*K_lqr)
 %definição das condicoes iniciais para o simulink
 x0 = [0 0 0 0];
 %x0_h = [0 0 0 0 0];
-finaltime = 160; % tempo de duração da simulação
+finaltime = 180; % tempo de duração da simulação
 StepSize = 0.01;
 
 %parametros dos sensores pq isto estava a ficar uma confusao
@@ -388,21 +388,3 @@ val=sim('cvoo_g19_falta_ficar_bonito_ZE2','StopTime',num2str(finaltime),'FixedSt
 
 %plots
 plots(val)
-
-% %% RP2 - controlo modal
-% % fugoide
-% wn_fug = 0.6;
-% xi_fug = 0.7;
-% % periodo curto
-% wn_pc = 8;
-% xi_pc = 0.8;
-% 
-% % valores proprios
-% val_p = [
-%     -xi_pc*wn_pc + 1i*(wn_pc*sqrt(1-xi_pc^2));
-%     -xi_pc*wn_pc - 1i*(wn_pc*sqrt(1-xi_pc^2));
-%     -xi_fug*wn_fug + 1i*(wn_fug*sqrt(1-xi_fug^2));
-%     -xi_fug*wn_fug - 1i*(wn_fug*sqrt(1-xi_fug^2));
-%     ];
-% % vetores proprios
-% 
