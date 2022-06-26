@@ -14,7 +14,7 @@ gg=ylabel('Velocidade Subida (m/s)');
 
 %elevator deflection
 subplot(3,3,3)
-gg=plot(val.tout,val.de*180/pi);
+gg=plot(val.de.time,val.de.signals.values*180/pi);
 set(gg,'LineWidth',1.5)
 gg=xlabel('Tempo (s)');
 gg=ylabel('Deflexão do Elevador (º)');
@@ -37,7 +37,7 @@ gg=ylabel('Velocidade Vertical (m/s)');
 
 %spoiler deflection
 subplot(3,3,6)
-gg=plot(val.tout,val.dsp*180/pi);
+gg=plot(val.dsp.time,val.dsp.signals.values*180/pi);
 set(gg,'LineWidth',1.5)
 gg=xlabel('Tempo (s)');
 gg=ylabel('Deflexão do Spoiler (º)');
