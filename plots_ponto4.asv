@@ -4,9 +4,9 @@ f.Position = [50 100 1500 450];
 
 %ascent speed
 subplot(3,3,[1,2])
-gg=plot(val.tout,val.h_pt(:,:),val.tout,val.h_pt_e(:,:),val.tout,val.h_pt_ref(:,:));
+gg=plot(val.tout,val.h_pt_ref(:,:),val.tout,val.h_pt(:,:),val.tout,val.h_pt_e(:,:));
 %gg=plot(val.tout,val.h_pt_ref(:,:),val.tout,val.h_pt(:,:));
-legend('real','estimated','reference');
+legend('reference','state','estimated');
 %legend('reference','state');
 set(gg,'LineWidth',1.5)
 gg=xlabel('Tempo (s)');
@@ -21,8 +21,8 @@ gg=ylabel('Deflexão do Elevador (º)');
 
 %airspeed 
 subplot(3,3,4)
-gg=plot(val.tout,val.u,val.tout,val.u_e,val.tout,val.u_ref(:,:));
-legend('real','estimated','reference');
+gg=plot(val.tout,val.u_ref(:,:),val.tout,val.u,val.tout,val.u_e);
+legend('reference','state','estimated');
 % gg=plot(val.tout,val.u_ref(:,:),val.tout,val.u);
 % legend('reference','state');
 set(gg,'LineWidth',1.5)
@@ -32,7 +32,7 @@ gg=ylabel('Velocidade Ar (m/s)');
 %vertical airspeed 
 subplot(3,3,5)
 gg=plot(val.tout,val.w(:,:),val.tout,val.w_e(:,:));
-legend('real','estimated');
+legend('reference','estimate');
 % gg=plot(val.tout,val.w(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Tempo (s)');
@@ -55,8 +55,7 @@ gg=ylabel('Altitude (m)');
 
 %angulo picada theta
 subplot(3,3,8)
-gg=plot(val.tout,val.theta(:,:)*180/pi,val.tout,val.theta_e(:,:)*180/pi);
-legend('real','estimate');
+gg=plot(val.tout,val.theta(:,:)*180/pi);
 set(gg,'LineWidth',1.5)
 gg=xlabel('Tempo (s)');
 gg=ylabel('Ângulo de Picada (º)');
@@ -64,8 +63,7 @@ gg=ylabel('Ângulo de Picada (º)');
 %razao picada q
 subplot(3,3,9)
 gg=plot(val.tout,val.q(:,:)*180/pi,val.tout,val.q_e(:,:)*180/pi);
-legend('real','estimate');
-%gg=plot(val.tout,val.q(:,:)*180/pi);
+gg=plot(val.tout,val.q(:,:)*180/pi);
 set(gg,'LineWidth',1.5)
 gg=xlabel('Tempo (s)');
 gg=ylabel('Razão Picada (º/s)');

@@ -167,8 +167,6 @@ h_ref = 100; % 100 m acima do solo
 %h_solo = 100; 
 %h_pt_ref = -1;
 %u_ref = 2;
-h_pt_ref = 0;
-u_ref = 0;
 u0 =6;
 dist_aux = 40*u0:10*u0:60*u0;
 ref_aux = 0:2.5*u0:5*u0;
@@ -205,12 +203,15 @@ d_h_pt_h = zeros(3,2);
 ge=eye(size(a_h_pt_h));
 qe=diag([1 1 1 1 1]);
 %re=100000*diag([1 1 1]);
-re=10000*diag([1 1 1]);
+re=1000*diag([1 1 1]);
 L=lqe(a_h_pt_h,ge,c_h_pt_h,qe,re);
 [ae,be,ce,de]=estim(a_h_pt_h,b_h_pt_h,c_h_pt_h,d_h_pt_h,L,[1, 2, 3],[1, 2]);
 
-x0_e = [0 0 0 0 cond_ini.h0];
+x0_e = [0 0 0 0 0];
 
-val=sim('cvoo_g19_compare_real_sensor','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
+val=sim('cvoo_g19_realiment_step','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
+%plots
+
+%val=sim('cvoo_g19_compare_real_sensor','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 %plots
 plots_ponto4(val,cond_ini);

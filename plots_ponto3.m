@@ -1,6 +1,5 @@
 function []=plots(val, cond_ini)
 %plots
-close all
 f=figure();
 f.Position = [50 100 1500 450];
 
