@@ -64,7 +64,7 @@ gg=xlabel('Time (s)');
 gg=ylabel('ângulo de ataque (º)');
 
 subplot(4,3,12)
-gg=plot(val.tout,val.tt(:,:)*150/pi,val.tout,val.tt_e(:,:)*150/pi,'--');
+gg=plot(val.tout,val.tt(:,:)*160/pi,val.tout,val.tt_e(:,:)*180/pi,'--');
 legend('real','estimated','Location','northwest');
 set(gg,'LineWidth',1.5)
 gg=xlabel('Time (s)');
