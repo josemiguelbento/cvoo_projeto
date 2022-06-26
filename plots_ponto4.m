@@ -32,7 +32,7 @@ gg=ylabel('Velocidade Ar (m/s)');
 %vertical airspeed 
 subplot(3,3,5)
 gg=plot(val.tout,val.w(:,:),val.tout,val.w_e(:,:));
-legend('real','estimated');
+legend('real','estimated','Location','Southeast');
 % gg=plot(val.tout,val.w(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Tempo (s)');
@@ -48,6 +48,7 @@ gg=ylabel('Deflexão do Spoiler (º)');
 %altitude
 subplot(3,3,7)
 gg=plot(val.tout,val.h(:,:),val.tout,val.h_e(:,:));
+legend('real','estimated');
 % gg=plot(val.tout,val.h(:,:));
 set(gg,'LineWidth',1.5)
 gg=xlabel('Tempo (s)');
@@ -56,7 +57,7 @@ gg=ylabel('Altitude (m)');
 %angulo picada theta
 subplot(3,3,8)
 gg=plot(val.tout,val.theta(:,:)*180/pi,val.tout,val.theta_e(:,:)*180/pi);
-legend('real','estimate');
+legend('real','estimated');
 set(gg,'LineWidth',1.5)
 gg=xlabel('Tempo (s)');
 gg=ylabel('Ângulo de Picada (º)');
@@ -64,7 +65,7 @@ gg=ylabel('Ângulo de Picada (º)');
 %razao picada q
 subplot(3,3,9)
 gg=plot(val.tout,val.q(:,:)*180/pi,val.tout,val.q_e(:,:)*180/pi);
-legend('real','estimate');
+legend('real','estimated','Location','Southeast');
 %gg=plot(val.tout,val.q(:,:)*180/pi);
 set(gg,'LineWidth',1.5)
 gg=xlabel('Tempo (s)');
