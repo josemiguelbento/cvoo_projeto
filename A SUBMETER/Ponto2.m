@@ -181,11 +181,11 @@ damp(a_h-b_h_sf*k_siso2')
 
 
 sys_SAE = ss(a_h-b_h_sf*k_siso2', b_h_sf, c_h, d_h_sf);
-figure()
-t_final_step = 100;
-opt = stepDataOptions('InputOffset',0,'StepAmplitude',1/180*pi);
+% figure()
+% t_final_step = 100;
+% opt = stepDataOptions('InputOffset',0,'StepAmplitude',1/180*pi);
 
-step(sys_SAE, t_final_step,opt)
+% step(sys_SAE, t_final_step,opt)
 
 a_h_SAE = a_h-b_h_sf*k_siso2';
 
@@ -203,7 +203,7 @@ t_dsp_ini = 50;
 dsp_step = 10*pi/180;
 t_dsp_step = 10;
 
-val_sae=sim('cvoo_g19_sae','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
+val_sae=sim('cvoo_g19_ponto2','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 
 plots_ponto2(val_sae)
 

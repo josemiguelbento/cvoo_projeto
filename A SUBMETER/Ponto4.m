@@ -209,7 +209,7 @@ L=lqe(a_h_pt_h,ge,c_h_pt_h,qe,re);
 
 x0_e = [0 0 0 0 0];
 
-val=sim('cvoo_g19_sensores_step','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
+val=sim('cvoo_g19_ponto4','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
 %plots
 
 %val=sim('cvoo_g19_compare_real_sensor','StopTime',num2str(finaltime),'FixedStep',num2str(StepSize));
